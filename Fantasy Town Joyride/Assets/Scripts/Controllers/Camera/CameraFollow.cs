@@ -6,18 +6,12 @@ namespace Spacecraft.Controllers.Camera
 {
 public class CameraFollow : MonoBehaviour
 {
-    private Rigidbody RigidbodyComponent;
 
-    [SerializeField] private float ForwardSpeed;
-
-    void Start()
-    {
-        RigidbodyComponent = GetComponent<Rigidbody>();
-    }
-
+    [SerializeField]
+    Transform target;
     void Update()
     {
-        RigidbodyComponent.MovePosition(RigidbodyComponent.position + transform.forward * ForwardSpeed * Time.deltaTime);
+        transform.position = target.position;
     }
 }
 }

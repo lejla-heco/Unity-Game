@@ -77,7 +77,7 @@ namespace Spacecraft.Controllers.Player
             }
 
             x = Mathf.Lerp(x, NewHorizontalValue, Time.deltaTime * LaneChangeSpeed);
-            Vector3 movePlayer = new Vector3(x - transform.position.x, 0, 0/*ForwardSpeed * Time.deltaTime*/);
+            Vector3 movePlayer = new Vector3(x - transform.position.x, 0, ForwardSpeed * Time.deltaTime);
             CharacterControl.Move(movePlayer);
             
             if (Input.GetKeyDown(KeyCode.LeftArrow)) CurrentAngle = TiltAngleLeft;
