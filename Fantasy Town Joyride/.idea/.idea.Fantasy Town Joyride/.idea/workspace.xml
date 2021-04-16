@@ -21,7 +21,6 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/SpacecraftController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/PlatformManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Platform.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/SpacecraftTag.cs" />
@@ -33,11 +32,17 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/LevelGenerator/LevelChunkData.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/LevelGenerator/ObjectPool.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/LevelGenerator/SpacecraftTag.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/FloatingOrigin.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Camera/CameraFollow.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/CoinManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/LevelGenerator/LevelLayoutGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/LevelGenerator/TriggerExit.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/SpacecraftTag.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/ObjectPool.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/TriggerExit.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/FloatingOrigin.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/SpacecraftController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/CoinManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelLayoutGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelChunkData.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Camera/CameraFollow.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1r7DNN3XsOkgxBs78KZM4VCNcCH" />
@@ -93,6 +98,7 @@
       <workItem from="1618399047491" duration="1793000" />
       <workItem from="1618483145552" duration="3804000" />
       <workItem from="1618507470868" duration="1274000" />
+      <workItem from="1618566816436" duration="278000" />
     </task>
     <servers />
   </component>

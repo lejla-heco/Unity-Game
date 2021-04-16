@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Spacecraft.LevelGenerator;
+using Spacecraft.Controllers.Core.LevelGenerator;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
