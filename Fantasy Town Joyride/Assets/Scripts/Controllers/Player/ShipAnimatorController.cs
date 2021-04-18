@@ -6,8 +6,9 @@ namespace Spacecraft.Controllers.Player
 {
     public class ShipAnimatorController : MonoBehaviour
     {
-        private static readonly int MoveUp = Animator.StringToHash("MoveUp");
-        private static readonly int MoveDown = Animator.StringToHash("MoveDown");
+        private static readonly int TriggerPlayerMoveUp = Animator.StringToHash("TriggerPlayerMoveUp");
+        private static readonly int TriggerPlayerMoveDown = Animator.StringToHash("TriggerPlayerMoveDown");
+
         private Animator shipAnimator { get; set; }
         
         private void Start()
@@ -17,12 +18,12 @@ namespace Spacecraft.Controllers.Player
         
         public void TriggerMoveUp()
         {
-            shipAnimator.SetTrigger(MoveUp);
+            shipAnimator.SetTrigger(TriggerPlayerMoveUp);
         }
         
         public void TriggerMoveDown()
         {
-            shipAnimator.SetTrigger(MoveDown);
+            shipAnimator.SetTrigger(TriggerPlayerMoveDown);
         }
     }
 }

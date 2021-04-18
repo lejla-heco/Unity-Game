@@ -45,8 +45,8 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Camera/CameraFollow.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/ShuffleBag.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/InputManagement.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/ShipAnimatorController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/SpacecraftController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/ShipAnimatorController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1r7DNN3XsOkgxBs78KZM4VCNcCH" />
@@ -103,7 +103,7 @@
       <workItem from="1618483145552" duration="3804000" />
       <workItem from="1618507470868" duration="1274000" />
       <workItem from="1618566816436" duration="1013000" />
-      <workItem from="1618759252557" duration="3549000" />
+      <workItem from="1618759252557" duration="4870000" />
     </task>
     <servers />
   </component>
