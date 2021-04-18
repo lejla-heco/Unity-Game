@@ -7,11 +7,11 @@ namespace Spacecraft.Controllers.Core
 {
     public class InputManagement : MonoBehaviour
     {
-        public Action<float, float> OnInputChanged;
+        public Action<float> OnInputChanged;
 
         private void Update()
         {
-            OnInputChanged?.Invoke(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            OnInputChanged?.Invoke(Input.GetAxisRaw("Horizontal"));//, Input.GetAxisRaw("Vertical"));
 
         }
     }
