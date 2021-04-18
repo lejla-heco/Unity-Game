@@ -12,13 +12,7 @@ namespace Spacecraft.Controllers.Player
         Middle,
         Right
     }
-    //[System.Serializable]
-    //public enum VER
-    //{
-    //    Up,
-    //    Middle,
-    //    Down
-    //}
+   
 
     public class SpacecraftController : MonoBehaviour
     {
@@ -26,17 +20,14 @@ namespace Spacecraft.Controllers.Player
         [SerializeField] [Range(0.1f, 100f)] private float ForwardSpeed;
         [SerializeField] [Range(0.1f, 20f)] private float LaneChangeSpeed;
         [SerializeField] private LANE currentPosition = LANE.Middle;
-        //[SerializeField] private VER currentPositionVer = VER.Middle;
 
         private float NewHorizontalValue;
-        private Animator anim;
+        private ShipAnimatorController ShipAnimator { get; set; }
 
         private float NewVerticalValue;
         [SerializeField] private float SlideLength;
-        //[SerializeField] private float SlideLengthVer;
 
         private float x;
-        //private float y;
         private bool CanMove;
         private bool canMove=true;
         private GameObject player;
@@ -48,40 +39,37 @@ namespace Spacecraft.Controllers.Player
 
         [SerializeField] private Quaternion CurrentAngle;
         private CharacterController CharacterControl;
+        
+        static KeyCode up;
+        static KeyCode down;
+        static KeyCode right;
+        static KeyCode left;
+
+        static public void SetDefaultControls()
+        {
+            up = KeyCode.UpArrow;
+            down = KeyCode.DownArrow;
+            right = KeyCode.RightArrow;
+            left = KeyCode.LeftArrow;
+        }
+
+        
         private void Start() 
         {
+            SetDefaultControls();
             transform.position = Vector3.zero; 
-            CurrentAngle = IdleAngle;//0,0,0
+            CurrentAngle = IdleAngle;
             CanMove = true;
             player = transform.GetChild(0).gameObject;
-            anim = player.GetComponent<Animator>();
+            ShipAnimator = player.GetComponent<ShipAnimatorController>();
             CharacterControl = GetComponent<CharacterController>();
             InputManager.OnInputChanged += OnInputChanged;
-          
-
-
-        }
-        void Update()
-        {
-            if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && canMove)
-            {
-                canMove = false;
-                anim.SetTrigger("MoveUp");
-                StartCoroutine(ActivateMovementVertical());
-            }
-
-            if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && canMove)
-            {
-                canMove = false;
-                anim.SetTrigger("MoveDown");
-                StartCoroutine(ActivateMovementVertical());
-            }
         }
 
 
-        private void OnInputChanged(float horizontal)//, float vertical)// promjene trake 
+        private void OnInputChanged()
         {
-            if (horizontal < 0)//lijevo 
+            if (Input.GetKeyDown(left)) 
             {
                 if (currentPosition == LANE.Middle && CanMove)
                 {
@@ -99,7 +87,7 @@ namespace Spacecraft.Controllers.Player
                 CanMove = false;
                 StartCoroutine(ActivateMoving());
             }
-            else if (horizontal > 0)// desno 
+            else if (Input.GetKeyDown(right))
             {
                 if (currentPosition == LANE.Middle && CanMove)
                 {
@@ -115,67 +103,32 @@ namespace Spacecraft.Controllers.Player
                 CanMove = false;
                 StartCoroutine(ActivateMoving());
             }
-          // else if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && CanMove)
-          //  {
+          
 
-          //      anim.SetTrigger("MoveUp");
-          //      CanMove = false;
-          //      StartCoroutine(ActivateMoving());
+           if (Input.GetKeyDown(up) && canMove)
+            {
+                canMove = false;
+                ShipAnimator.TriggerMoveUp();
+                StartCoroutine(ActivateMovementVertical());
+            }
 
-          //  }
-
-          //else  if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && CanMove)
-          //  {
-          //      //CanMove = false;
-          //      anim.SetTrigger("MoveDown");
-          //      CanMove = false;
-          //      StartCoroutine(ActivateMoving());
-          //      //StartCoroutine(ActivateMovementVertical());
-          //  }
-            //else if (vertical < 0)// dole
-            //{
-            //    if (currentPositionVer == VER.Middle && CanMove)
-            //    {
-            //        NewVerticalValue = -SlideLengthVer;
-            //        currentPositionVer = VER.Down;
-            //    }
-            //    else if (currentPositionVer == VER.Up && CanMove)
-            //    {
-            //        NewVerticalValue = 0;
-            //        currentPositionVer = VER.Middle;
-            //    }
-            //    CanMove = false;
-            //    StartCoroutine(ActivateMoving());
-            //}
-            //else if (vertical > 0)//gore
-            //{
-            //    if (currentPositionVer == VER.Middle && CanMove)
-            //    {
-            //        NewVerticalValue = SlideLengthVer;
-            //        currentPositionVer = VER.Up;
-            //    }
-            //    else if (currentPositionVer == VER.Down && CanMove)
-            //    {
-            //        NewVerticalValue = 0;
-            //        currentPositionVer = VER.Middle;
-            //    }
-            //    CanMove = false;
-            //    StartCoroutine(ActivateMoving());
-            //}
-
-            //Vertical movement
+            if (Input.GetKeyDown(down) && canMove)
+            {
+                canMove = false;
+                ShipAnimator.TriggerMoveDown();
+                StartCoroutine(ActivateMovementVertical());
+            }
 
 
-            x = Mathf.Lerp(x, NewHorizontalValue, Time.deltaTime * LaneChangeSpeed);// suptilan prelazak izmedju traka
-            //y = Mathf.Lerp(y, NewVerticalValue, Time.deltaTime * LaneChangeSpeed);
+            x = Mathf.Lerp(x, NewHorizontalValue, Time.deltaTime * LaneChangeSpeed);
 
-            Vector3 movePlayer = new Vector3(x - transform.position.x, 0, 0); //ForwardSpeed * Time.deltaTime);
+            Vector3 movePlayer = new Vector3(x - transform.position.x, 0, ForwardSpeed * Time.deltaTime);
             CharacterControl.Move(movePlayer);
 
-            // za uglove, promjenit za ose 
-            if (Input.GetKeyDown(KeyCode.LeftArrow)) CurrentAngle = TiltAngleLeft;
-            if (Input.GetKeyDown(KeyCode.RightArrow)) CurrentAngle = TitlAngleRight;
-            if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) CurrentAngle = IdleAngle;
+       
+            if (Input.GetKeyDown(left)) CurrentAngle = TiltAngleLeft;
+            if (Input.GetKeyDown(right)) CurrentAngle = TitlAngleRight;
+            if (Input.GetKeyUp(left) || Input.GetKeyUp(right)) CurrentAngle = IdleAngle;
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, CurrentAngle, 0.1f);
            
 
@@ -183,9 +136,9 @@ namespace Spacecraft.Controllers.Player
         IEnumerator ActivateMovementVertical()
         {
             yield return new WaitForSeconds(1.0f);
-            CanMove = true;
+            canMove = true;
         }
-        IEnumerator ActivateMoving()// povratni tip interfejs 
+        IEnumerator ActivateMoving()
         {
             yield return new WaitForSeconds(1f);
             CanMove = true;

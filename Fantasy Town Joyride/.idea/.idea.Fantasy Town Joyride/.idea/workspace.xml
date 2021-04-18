@@ -12,6 +12,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/New Unity Project/Assets/Scripts/Contollers/Core/ObjectPool.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/ShuffleBag.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/New Unity Project/Assets/Scripts/Contollers/Core/InputManagement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CoinManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/FloatingOrigin.cs" root0="FORCE_HIGHLIGHTING" />
@@ -38,11 +39,14 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/ObjectPool.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/TriggerExit.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/FloatingOrigin.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/SpacecraftController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/CoinManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelLayoutGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelChunkData.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Camera/CameraFollow.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/ShuffleBag.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/InputManagement.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/ShipAnimatorController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/SpacecraftController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1r7DNN3XsOkgxBs78KZM4VCNcCH" />
@@ -98,7 +102,8 @@
       <workItem from="1618399047491" duration="1793000" />
       <workItem from="1618483145552" duration="3804000" />
       <workItem from="1618507470868" duration="1274000" />
-      <workItem from="1618566816436" duration="278000" />
+      <workItem from="1618566816436" duration="1013000" />
+      <workItem from="1618759252557" duration="3549000" />
     </task>
     <servers />
   </component>
