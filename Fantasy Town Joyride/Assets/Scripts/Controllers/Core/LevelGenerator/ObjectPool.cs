@@ -1,34 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Spacecraft.Controllers.Core.LevelGenerator
 {
-public class ObjectPool : MonoBehaviour
-{
-    
-    [SerializeField]
-    private Transform parentTransform;
-
-    [SerializeField] private LevelChunkData[] Chunks;
-
-    private List<LevelChunkData> Prefabs { get; set; }
-
-    private int Index { get; set; } = 0;
-
-    private void Start()
+    public class ObjectPool<T>
     {
-        Prefabs = new List<LevelChunkData>();
-        for (int i = 0; i < Chunks.Length; i++)
+        private int Index { get; set; } = 0;
+        private List<T> ObjectsList { get; set; }
+
+        public ObjectPool()
         {
-            Prefabs.Add(Instantiate(Chunks[i], parentTransform));
+            ObjectsList = new List<T>();
         }
-    }
 
-    public LevelChunkData PickChunkFromPool()
-    {
-        var PooledObject = Prefabs[Index++ % Prefabs.Count];
-        return PooledObject;
+        public ObjectPool(List<T> objects)
+        {
+            ObjectsList = objects;
+        }
+
+        public void Add(T gameObject)
+        {
+            this.ObjectsList.Add(gameObject);
+        }
+        
+        public T PickChunkFromPool() => ObjectsList[Index++ % ObjectsList.Count];
     }
-}
 }

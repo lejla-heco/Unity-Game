@@ -18,10 +18,10 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CoinManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/FloatingOrigin.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/New Unity Project/Assets/Scripts/Contollers/BulletControler.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/New Unity Project/Assets/Scripts/Contollers/Player/ShipController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/New Unity Project/Assets/Scripts/Behaviours/Player/ShootingBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/ChunkGeneratorData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Behaviours/ChunkBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelGenerator.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -40,20 +40,21 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/LevelGenerator/LevelLayoutGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/LevelGenerator/TriggerExit.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/SpacecraftTag.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/ObjectPool.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/TriggerExit.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/FloatingOrigin.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/CoinManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelLayoutGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelChunkData.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Camera/CameraFollow.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/ShuffleBag.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/InputManagement.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/SpacecraftController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/ShipAnimatorController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/ChunkData.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/ChunkGeneratorData.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/ScriptableObjects/ChunkData.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/ShipAnimatorController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/ObjectPool.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelLayoutGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Behaviours/ChunkBehaviour.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/TriggerExit.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/FloatingOrigin.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/SpacecraftController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1r7DNN3XsOkgxBs78KZM4VCNcCH" />
@@ -111,7 +112,9 @@
       <workItem from="1618507470868" duration="1274000" />
       <workItem from="1618566816436" duration="1013000" />
       <workItem from="1618759252557" duration="6765000" />
-      <workItem from="1618827724125" duration="4003000" />
+      <workItem from="1618827724125" duration="4366000" />
+      <workItem from="1618860181692" duration="6700000" />
+      <workItem from="1619105592553" duration="2940000" />
     </task>
     <servers />
   </component>

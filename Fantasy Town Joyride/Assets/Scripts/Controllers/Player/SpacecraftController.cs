@@ -28,13 +28,11 @@ namespace Spacecraft.Controllers.Player
         [SerializeField] private float SlideLength;
 
         private float x;
-        private bool CanMove;
-        private bool canMove=true;
         private GameObject player;
 
         //angles:
-        private Quaternion TiltAngleLeft = Quaternion.Euler(0, 0, -30);
-        private Quaternion TitlAngleRight = Quaternion.Euler(0, 0, 30);
+        private Quaternion TiltAngleRight = Quaternion.Euler(0, 0, -30);
+        private Quaternion TiltAngleLeft = Quaternion.Euler(0, 0, 30);
         private Quaternion IdleAngle = Quaternion.Euler(0, 0, 0);
 
         [SerializeField] private Quaternion CurrentAngle;
@@ -59,7 +57,6 @@ namespace Spacecraft.Controllers.Player
             SetDefaultControls();
             transform.position = Vector3.zero; 
             CurrentAngle = IdleAngle;
-            CanMove = true;
             player = transform.GetChild(0).gameObject;
             ShipAnimator = player.GetComponent<ShipAnimatorController>();
             CharacterControl = GetComponent<CharacterController>();
@@ -69,54 +66,45 @@ namespace Spacecraft.Controllers.Player
 
         private void OnInputChanged()
         {
-            if (Input.GetKeyDown(left)) 
+            if (Input.GetKeyDown(left))
             {
-                if (currentPosition == LANE.Middle && CanMove)
+                if (currentPosition == LANE.Middle)
                 {
                     NewHorizontalValue = -SlideLength;
                     currentPosition = LANE.Left;
                 }
-                else if (currentPosition == LANE.Right && CanMove)
+                else if (currentPosition == LANE.Right)
                 {
                     NewHorizontalValue = 0;
                     currentPosition = LANE.Middle;
 
                 }
 
-
-                CanMove = false;
-                StartCoroutine(ActivateMoving());
             }
             else if (Input.GetKeyDown(right))
             {
-                if (currentPosition == LANE.Middle && CanMove)
+                if (currentPosition == LANE.Middle)
                 {
                     NewHorizontalValue = SlideLength;
                     currentPosition = LANE.Right;
                 }
-                else if (currentPosition == LANE.Left && CanMove)
+                else if (currentPosition == LANE.Left)
                 {
                     NewHorizontalValue = 0;
                     currentPosition = LANE.Middle;
 
                 }
-                CanMove = false;
-                StartCoroutine(ActivateMoving());
             }
-          
 
-           if (Input.GetKeyDown(up) && canMove)
+
+            if (Input.GetKeyDown(up))
             {
-                canMove = false;
                 ShipAnimator.TriggerMoveUp();
-                StartCoroutine(ActivateMovementVertical());
             }
 
-            if (Input.GetKeyDown(down) && canMove)
+            if (Input.GetKeyDown(down))
             {
-                canMove = false;
                 ShipAnimator.TriggerMoveDown();
-                StartCoroutine(ActivateMovementVertical());
             }
 
 
@@ -125,23 +113,13 @@ namespace Spacecraft.Controllers.Player
             Vector3 movePlayer = new Vector3(x - transform.position.x, 0, ForwardSpeed * Time.deltaTime);
             CharacterControl.Move(movePlayer);
 
-       
+
             if (Input.GetKeyDown(left)) CurrentAngle = TiltAngleLeft;
-            if (Input.GetKeyDown(right)) CurrentAngle = TitlAngleRight;
+            if (Input.GetKeyDown(right)) CurrentAngle = TiltAngleRight;
             if (Input.GetKeyUp(left) || Input.GetKeyUp(right)) CurrentAngle = IdleAngle;
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, CurrentAngle, 0.1f);
-           
 
-        }
-        IEnumerator ActivateMovementVertical()
-        {
-            yield return new WaitForSeconds(1.0f);
-            canMove = true;
-        }
-        IEnumerator ActivateMoving()
-        {
-            yield return new WaitForSeconds(1f);
-            CanMove = true;
+
         }
     }
 }

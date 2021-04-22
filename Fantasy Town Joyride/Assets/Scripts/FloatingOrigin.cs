@@ -7,15 +7,15 @@ namespace Spacecraft
 [RequireComponent(typeof(Camera))]
 public class FloatingOrigin : MonoBehaviour
 {
-    public float threshold = 100.0f;
-    public LevelLayoutGenerator layoutGenerator;
+    public float Threshold = 100.0f;
+    public LevelGenerator LayoutGenerator;
 
     void LateUpdate()
     {
         Vector3 cameraPosition = gameObject.transform.position;
         cameraPosition.y = 0f;
 
-        if (cameraPosition.z > threshold)
+        if (cameraPosition.z > Threshold)
         {
 
             for (int z = 0; z < SceneManager.sceneCount; z++)
@@ -27,7 +27,7 @@ public class FloatingOrigin : MonoBehaviour
             }
 
             Vector3 originDelta = Vector3.zero - cameraPosition;
-            layoutGenerator.UpdateSpawnOrigin(originDelta);
+            //LayoutGenerator.UpdateSpawnOrigin(originDelta);
         }
 
     }

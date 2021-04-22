@@ -9,21 +9,21 @@ namespace Spacecraft.Controllers.Player
         private static readonly int TriggerPlayerMoveUp = Animator.StringToHash("TriggerPlayerMoveUp");
         private static readonly int TriggerPlayerMoveDown = Animator.StringToHash("TriggerPlayerMoveDown");
 
-        private Animator shipAnimator { get; set; }
+        private Animator ShipAnimator { get; set; }
         
         private void Start()
         {
-            shipAnimator = this.GetComponent<Animator>();
+            ShipAnimator = this.GetComponent<Animator>();
         }
         
         public void TriggerMoveUp()
         {
-            shipAnimator.SetTrigger(TriggerPlayerMoveUp);
+            ShipAnimator.SetTrigger(TriggerPlayerMoveUp);
         }
         
         public void TriggerMoveDown()
         {
-            shipAnimator.SetTrigger(TriggerPlayerMoveDown);
+            ShipAnimator.SetTrigger(TriggerPlayerMoveDown);
         }
     }
 }

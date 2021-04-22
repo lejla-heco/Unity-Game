@@ -5,21 +5,21 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 {
     public class TriggerExit : MonoBehaviour
     {
-        public float delay = 1f;
+        public float Delay = 1f;
     
         public delegate void ExitAction();
         public static event ExitAction OnChunkExited;
 
-        private bool exited = false;
+        private bool Exited = false;
 
         private void OnTriggerExit(Collider other)
         {
             SpacecraftTag spacecraftTag = other.GetComponent<SpacecraftTag>();
             if (spacecraftTag != null)
             {
-                if (!exited)
+                if (!Exited)
                 {
-                    exited = true;
+                    Exited = true;
                     OnChunkExited();
                     StartCoroutine(WaitAndDeactivate());
                 }
@@ -30,7 +30,7 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 
         IEnumerator WaitAndDeactivate()
         {
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(Delay);
 
             //transform.root.gameObject.SetActive(false);
             this.transform.parent.gameObject.SetActive(false);

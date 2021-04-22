@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Spacecraft
+namespace Spacecraft.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "ChunkGeneratorData", menuName = "Fantasy Town Joyride/Chunk Generator data")]
     public class ChunkGeneratorData : ScriptableObject
