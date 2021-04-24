@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 namespace Spacecraft
 {
-[RequireComponent(typeof(Camera))]
 public class FloatingOrigin : MonoBehaviour
 {
     public float Threshold = 100.0f;
@@ -25,9 +24,7 @@ public class FloatingOrigin : MonoBehaviour
                     g.transform.position -= cameraPosition;
                 }
             }
-
-            Vector3 originDelta = Vector3.zero - cameraPosition;
-            //LayoutGenerator.UpdateSpawnOrigin(originDelta);
+            LayoutGenerator.UpdateChunkCount();
         }
 
     }

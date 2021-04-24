@@ -67,6 +67,11 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
             ChunkCount++;
         }
 
+        public void UpdateChunkCount()
+        {
+            ChunkCount = 3;
+        }
+
         /*private void Update()
         {
             if (Time.time > TimeForNextChunk)

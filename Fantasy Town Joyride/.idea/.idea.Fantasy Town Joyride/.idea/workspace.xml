@@ -40,7 +40,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/LevelGenerator/LevelLayoutGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/LevelGenerator/TriggerExit.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/SpacecraftTag.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/CoinManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelChunkData.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Camera/CameraFollow.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/ShuffleBag.cs" />
@@ -52,9 +51,10 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelLayoutGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Behaviours/ChunkBehaviour.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/TriggerExit.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/FloatingOrigin.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/SpacecraftController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/CoinManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/FloatingOrigin.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1r7DNN3XsOkgxBs78KZM4VCNcCH" />
@@ -116,6 +116,8 @@
       <workItem from="1618860181692" duration="6700000" />
       <workItem from="1619105592553" duration="2940000" />
       <workItem from="1619206229597" duration="614000" />
+      <workItem from="1619275457214" duration="1481000" />
+      <workItem from="1619277523620" duration="852000" />
     </task>
     <servers />
   </component>
