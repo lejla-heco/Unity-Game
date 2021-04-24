@@ -45,7 +45,7 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 
             LevelPool = new ObjectPool<GameObject>();
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 50; i++)
             {
                 LevelPool.Add(Instantiate(ChunksShuffleBag.Next(), Vector3.zero, Quaternion.identity, ChunksParent));
             }
