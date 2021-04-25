@@ -11,18 +11,16 @@ public class FloatingOrigin : MonoBehaviour
 
     void LateUpdate()
     {
-        Vector3 cameraPosition = gameObject.transform.position;
-        cameraPosition.y = 0f;
-
-        if (cameraPosition.z > Threshold)
+        float CameraParentZ = this.transform.parent.gameObject.transform.position.z;
+        Vector3 CameraPosition = gameObject.transform.position;
+        
+        if (CameraPosition.z > Threshold)
         {
-
-            for (int z = 0; z < SceneManager.sceneCount; z++)
+            var Scene = SceneManager.GetActiveScene();
+            Vector3 PositionZ = new Vector3(0, 0, CameraParentZ);
+            foreach (GameObject g in Scene.GetRootGameObjects())
             {
-                foreach (GameObject g in SceneManager.GetSceneAt(z).GetRootGameObjects())
-                {
-                    g.transform.position -= cameraPosition;
-                }
+                g.transform.position -= PositionZ;
             }
             LayoutGenerator.UpdateChunkCount();
         }

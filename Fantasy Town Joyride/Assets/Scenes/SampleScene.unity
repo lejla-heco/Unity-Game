@@ -680,7 +680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423c4effbffa39c4c85345090908ebb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Threshold: 100
+  Threshold: 300
   LayoutGenerator: {fileID: 284645143}
 --- !u!1001 &997291747
 PrefabInstance:
