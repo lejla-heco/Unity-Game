@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Spacecraft.Controllers.Core;
+using Spacecraft.Controllers.Core.Entities;
 using UnityEngine;
 namespace Spacecraft.Controllers.Player
 {
@@ -12,14 +13,14 @@ namespace Spacecraft.Controllers.Player
         Middle,
         Right
     }
-   
 
-    public class SpacecraftController : MonoBehaviour
+
+    public class SpacecraftController : TrackedEntity
     {
         [SerializeField] private InputManagement InputManager;
         [SerializeField] [Range(0.1f, 100f)] private float ForwardSpeed;
         [SerializeField] [Range(0.1f, 20f)] private float LaneChangeSpeed;
-        [SerializeField] private LANE currentPosition = LANE.Middle;
+        [SerializeField] private LANE CurrentPosition = LANE.Middle;
 
         private float NewHorizontalValue;
         private ShipAnimatorController ShipAnimator { get; set; }
@@ -37,7 +38,7 @@ namespace Spacecraft.Controllers.Player
 
         [SerializeField] private Quaternion CurrentAngle;
         private CharacterController CharacterControl;
-        
+
         static KeyCode up;
         static KeyCode down;
         static KeyCode right;
@@ -51,11 +52,11 @@ namespace Spacecraft.Controllers.Player
             left = KeyCode.LeftArrow;
         }
 
-        
-        private void Start() 
+
+        private void Start()
         {
             SetDefaultControls();
-            transform.position = Vector3.zero; 
+            transform.position = Vector3.zero;
             CurrentAngle = IdleAngle;
             player = transform.GetChild(0).gameObject;
             ShipAnimator = player.GetComponent<ShipAnimatorController>();
@@ -66,32 +67,39 @@ namespace Spacecraft.Controllers.Player
 
         private void OnInputChanged()
         {
+            if (IsPaused)
+            {
+
+                Debug.Log("Umro je");
+                return;
+            }
+
             if (Input.GetKeyDown(left))
             {
-                if (currentPosition == LANE.Middle)
+                if (CurrentPosition == LANE.Middle)
                 {
                     NewHorizontalValue = -SlideLength;
-                    currentPosition = LANE.Left;
+                    CurrentPosition = LANE.Left;
                 }
-                else if (currentPosition == LANE.Right)
+                else if (CurrentPosition == LANE.Right)
                 {
                     NewHorizontalValue = 0;
-                    currentPosition = LANE.Middle;
+                    CurrentPosition = LANE.Middle;
 
                 }
 
             }
             else if (Input.GetKeyDown(right))
             {
-                if (currentPosition == LANE.Middle)
+                if (CurrentPosition == LANE.Middle)
                 {
                     NewHorizontalValue = SlideLength;
-                    currentPosition = LANE.Right;
+                    CurrentPosition = LANE.Right;
                 }
-                else if (currentPosition == LANE.Left)
+                else if (CurrentPosition == LANE.Left)
                 {
                     NewHorizontalValue = 0;
-                    currentPosition = LANE.Middle;
+                    CurrentPosition = LANE.Middle;
 
                 }
             }
