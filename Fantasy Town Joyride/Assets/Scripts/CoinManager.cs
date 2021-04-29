@@ -8,9 +8,10 @@ public class CoinManager : MonoBehaviour
 {
     private int RotateSpeed;
     private int Delay;
+    private static int Points = 0;
     private void Start()
     {
-        RotateSpeed = 4;
+        RotateSpeed = 3;
         Delay = 2;
     }
     private void Update()
@@ -20,14 +21,23 @@ public class CoinManager : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        SpacecraftTag spacecraftTag = other.GetComponent<SpacecraftTag>();
-        if (spacecraftTag != null)
+        if (this.gameObject.CompareTag("BigGem"))
         {
-            this.gameObject.SetActive(false);
-            Reactivate();
+                Deactivate();
+                Points += 2;
+        }
+        if (this.gameObject.CompareTag("SmallGem"))
+        {
+                Deactivate();
+                Points += 1;
         }
     }
-    
+
+    private void Deactivate()
+    {
+        this.gameObject.SetActive(false);
+        Reactivate();
+    }
     IEnumerator Reactivate()
     {
         yield return new WaitForSeconds(Delay);

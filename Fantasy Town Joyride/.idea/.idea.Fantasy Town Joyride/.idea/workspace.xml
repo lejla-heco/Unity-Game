@@ -52,9 +52,10 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Behaviours/ChunkBehaviour.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/TriggerExit.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Player/SpacecraftController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/CoinManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/FloatingOrigin.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/ObstracleCollision.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/CoinManager.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1r7DNN3XsOkgxBs78KZM4VCNcCH" />
@@ -119,6 +120,7 @@
       <workItem from="1619275457214" duration="1481000" />
       <workItem from="1619277523620" duration="852000" />
       <workItem from="1619315130305" duration="1834000" />
+      <workItem from="1619694391476" duration="3318000" />
     </task>
     <servers />
   </component>

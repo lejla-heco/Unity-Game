@@ -21,7 +21,6 @@ namespace Spacecraft
             SpacecraftTag spacecraftTag = other.GetComponent<SpacecraftTag>();
             if (spacecraftTag != null)
             {
-                Debug.Log("SPUCO");
                 LoseLife();
                 Debug.Log("Ima zivota = " + lives);
                 
