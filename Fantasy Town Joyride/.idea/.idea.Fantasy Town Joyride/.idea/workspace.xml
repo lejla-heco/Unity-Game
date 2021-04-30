@@ -23,6 +23,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CoinManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/FloatingOrigin.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CoinCollector.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Behaviours/ChunkBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -40,7 +41,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/LevelGenerator/SpacecraftTag.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/LevelGenerator/LevelLayoutGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/LevelGenerator/TriggerExit.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/SpacecraftTag.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelChunkData.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Camera/CameraFollow.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/ShuffleBag.cs" />
@@ -56,9 +56,11 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/LevelGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/FloatingOrigin.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/ObstracleCollision.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/CoinManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Shader/CurvedShader.shader" />
       <option value="$PROJECT_DIR$/Assets/Shader/CurvedControls.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controllers/Core/LevelGenerator/SpacecraftTag.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/CoinManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/CoinCollector.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1r7DNN3XsOkgxBs78KZM4VCNcCH" />
@@ -123,7 +125,7 @@
       <workItem from="1619275457214" duration="1481000" />
       <workItem from="1619277523620" duration="852000" />
       <workItem from="1619315130305" duration="1834000" />
-      <workItem from="1619694391476" duration="5688000" />
+      <workItem from="1619694391476" duration="12084000" />
     </task>
     <servers />
   </component>
