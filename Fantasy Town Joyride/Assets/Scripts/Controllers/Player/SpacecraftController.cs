@@ -43,6 +43,8 @@ namespace Spacecraft.Controllers.Player
         static KeyCode down;
         static KeyCode right;
         static KeyCode left;
+        
+        [SerializeField] private AudioClip SlideSound;
 
         static public void SetDefaultControls()
         {
@@ -87,7 +89,7 @@ namespace Spacecraft.Controllers.Player
                     CurrentPosition = LANE.Middle;
 
                 }
-
+                PlaySlideSound();
             }
             else if (Input.GetKeyDown(right))
             {
@@ -102,6 +104,7 @@ namespace Spacecraft.Controllers.Player
                     CurrentPosition = LANE.Middle;
 
                 }
+                PlaySlideSound();
             }
 
 
@@ -128,6 +131,11 @@ namespace Spacecraft.Controllers.Player
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, CurrentAngle, 0.1f);
 
 
+        }
+
+        private void PlaySlideSound()
+        {
+            AudioSource.PlayClipAtPoint(SlideSound, player.transform.position);
         }
     }
 }
