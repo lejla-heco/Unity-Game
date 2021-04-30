@@ -111,11 +111,13 @@ namespace Spacecraft.Controllers.Player
             if (Input.GetKeyDown(up))
             {
                 ShipAnimator.TriggerMoveUp();
+                PlaySlideSound();
             }
 
             if (Input.GetKeyDown(down))
             {
                 ShipAnimator.TriggerMoveDown();
+                PlaySlideSound();
             }
 
 
@@ -130,7 +132,7 @@ namespace Spacecraft.Controllers.Player
             if (Input.GetKeyUp(left) || Input.GetKeyUp(right)) CurrentAngle = IdleAngle;
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, CurrentAngle, 0.1f);
 
-
+            
         }
 
         private void PlaySlideSound()
