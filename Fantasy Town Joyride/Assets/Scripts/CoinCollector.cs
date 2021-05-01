@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Spacecraft.Controllers.Core.Entities;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Spacecraft
 {
@@ -12,10 +14,12 @@ namespace Spacecraft
         private int Points;
         private int ThisGamesPoints = 0;
         [SerializeField] private AudioClip CoinPickUpSound;
+        [SerializeField] private TextMeshProUGUI CollectedCoins;
         private void Start()
         {
             Points = PlayerPrefs.GetInt("CollectedMoney", 0);
             Delay = 2;
+            CollectedCoins.text = "Coins: " + Points.ToString();
         }
 
         private void Update()
@@ -43,7 +47,7 @@ namespace Spacecraft
             }
 
             int Result = Points + ThisGamesPoints;
-            Debug.Log("Points : " + Result);
+            CollectedCoins.text = "Coins: " + Result.ToString();
         }
 
         IEnumerator Reactivate(Collider other)
