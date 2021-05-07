@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Spacecraft.Consts;
 using Spacecraft.Controllers.Core;
 using Spacecraft.Controllers.Core.Entities;
 using Spacecraft.Controllers.Core.LevelGenerator;
@@ -43,8 +44,6 @@ namespace Spacecraft.Controllers.Player
 		const KeyCode Down = KeyCode.DownArrow;
 		const KeyCode Right = KeyCode.RightArrow;
 		const KeyCode Left = KeyCode.LeftArrow;
-
-		private const int HowManyUnitsUntilWorldResets = 200;
 
 		private void Start()
 		{
@@ -126,35 +125,37 @@ namespace Spacecraft.Controllers.Player
 			if (Input.GetKeyDown(Left)) CurrentAngle = TiltAngleLeft;
 			if (Input.GetKeyDown(Right)) CurrentAngle = TiltAngleRight;
 			if (Input.GetKeyUp(Left) || Input.GetKeyUp(Right)) CurrentAngle = IdleAngle;
-			this.transform.rotation = Quaternion.Slerp(this.transform.rotation, CurrentAngle, 0.1f);
+			transform.rotation = Quaternion.Slerp(this.transform.rotation, CurrentAngle, 0.1f);
 
-			if (transform.position.z > HowManyUnitsUntilWorldResets) // this code resets player and map
+			if (transform.position.z > GameConsts.HowManyUnitsUntilWorldResets) // this code resets player and map
 			{
-				int activeChilds = 0;
-				// move all active child objects
-				for (int i = 0; i < Level.transform.childCount; i++)
-				{
-					Transform child = Level.transform.GetChild(i);
-					if (child.gameObject.activeSelf)
-					{
-						child.localPosition = new Vector3(child.localPosition.x, child.localPosition.y, (activeChilds - 1) * 100);
-						activeChilds++;
-					}
-				}
-				transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-				LevelGenerator.ResetChunkNumbers(activeChilds);
-
-				Debug.Log("Active Children for reset: " + activeChilds);
+				ResetObjectsToOrigin();
 			}
-
-			// Debug.Log("Level Z Position: " + Level.transform.position.z);
-			// Debug.Log("Player Z Position: " + transform.position.z);
-			// Debug.Log(" ------- ");
 		}
 
 		private void PlaySlideSound()
 		{
 			AudioSource.PlayClipAtPoint(SlideSound, transform.position);
+		}
+
+		private void ResetObjectsToOrigin()
+		{
+			int activeChildren = 0;
+			// move all active child objects
+			for (int i = 0; i < Level.transform.childCount; i++)
+			{
+				Transform child = Level.transform.GetChild(i);
+				if (child.gameObject.activeSelf)
+				{
+					var localPosition = child.localPosition;
+					child.localPosition = new Vector3(localPosition.x, localPosition.y, (activeChildren * GameConsts.ChunkLength) + GameConsts.ChunkGenerationOffset);
+					activeChildren++;
+				}
+			}
+			transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+			LevelGenerator.ResetChunkNumbers(activeChildren);
+
+			Debug.Log("Active Children for reset: " + activeChildren);
 		}
 	}
 }

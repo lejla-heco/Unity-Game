@@ -35,7 +35,7 @@ namespace Spacecraft
             //livesText.text = "Lives: " + lives;
             if (lives == 0)
             {
-                Die();
+                // Die();
             }
         }
         private void Die()

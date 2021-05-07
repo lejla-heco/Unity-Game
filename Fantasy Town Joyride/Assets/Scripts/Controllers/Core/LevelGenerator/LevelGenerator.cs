@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Spacecraft.Consts;
 using Spacecraft.ScriptableObjects;
 using UnityEngine;
 
@@ -8,21 +6,13 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 {
 	public class LevelGenerator : MonoBehaviour
 	{
-		[SerializeField]
-		private ChunkGeneratorData GeneratorData;
-		[SerializeField]
-		private Transform ChunksParent;
+		[SerializeField] private ChunkGeneratorData GeneratorData;
+		[SerializeField] private Transform ChunksParent;
 
 		private ShuffleBag<GameObject> ChunksShuffleBag;
-
 		private ObjectPool<GameObject> LevelPool { get; set; }
 
-		private int ChunkCount = 0;
-		private int ChunksToSpawn = 2;
-		private int ChunkLength = 50;
-		// private int CurrentChunk = 0;
-
-		private GameObject Player;
+		private int ActiveChunkCount = 0;
 
 		private void OnEnable()
 		{
@@ -34,17 +24,12 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 		}
 		private void Start()
 		{
-
-			if (Player == null)
-			{
-				Player = GameObject.FindGameObjectWithTag("Player");
-			}
-
 			ChunksShuffleBag = new ShuffleBag<GameObject>();
-			for (int i = 0; i < GeneratorData.Chunks.Count; i++)
+			foreach (var ChunkData in GeneratorData.Chunks)
 			{
-				ChunksShuffleBag.Add(GeneratorData.Chunks[i].Chunk, GeneratorData.Chunks[i].NumberOfOccurances);
+				ChunksShuffleBag.Add(ChunkData.Chunk, ChunkData.NumberOfOccurances);
 			}
+
 
 			LevelPool = new ObjectPool<GameObject>();
 
@@ -55,7 +40,7 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 				LevelPool.Add(Object);
 			}
 
-			for (int i = 0; i < ChunksToSpawn; i++)
+			for (int i = 0; i < GameConsts.InitialChunksNumber; i++)
 			{
 				PickAndSpawnChunk();
 			}
@@ -63,26 +48,15 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 		}
 		private void PickAndSpawnChunk()
 		{
-			int nextZPosition = ChunkCount * ChunkLength;
 			var PooledChunk = LevelPool.PickChunkFromPool();
-			// while (PooledChunk.activeSelf)
-			// {
-			// 	PooledChunk = LevelPool.PickChunkFromPool();
-			// }
-			PooledChunk.transform.position = new Vector3(0, 0, nextZPosition);
+			PooledChunk.transform.position = new Vector3(0, 0, (ActiveChunkCount * GameConsts.ChunkLength) + GameConsts.ChunkGenerationOffset);
 			PooledChunk.SetActive(true);
-			ChunkCount++;
+			ActiveChunkCount++;
 		}
-		private void Update()
-		{
-			// ∂CurrentChunk = (int)Math.Floor(Player.transform.position.z / 100);
-			// Debug.Log("Current chunk is " + CurrentChunk + " - Z: " + Player.transform.position.z);
-		}
-
 
 		public void ResetChunkNumbers(int n = 0)
 		{
-			ChunkCount = n;
+			ActiveChunkCount = n;
 		}
 	}
 }
