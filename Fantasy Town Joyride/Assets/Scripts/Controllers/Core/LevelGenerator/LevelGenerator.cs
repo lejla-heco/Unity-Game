@@ -6,84 +6,83 @@ using UnityEngine;
 
 namespace Spacecraft.Controllers.Core.LevelGenerator
 {
-    public class LevelGenerator : MonoBehaviour
-    {
-        [SerializeField]
-        private ChunkGeneratorData GeneratorData;
-        [SerializeField]
-        private float ChunkGenerationSpeed;
-        [SerializeField]
-        private Transform ChunksParent;
-        
-        private ShuffleBag<GameObject> ChunksShuffleBag;
-        private float TimeForNextChunk;
-        
-        private ObjectPool<GameObject> LevelPool { get; set; }
-        
-        private GameObject PooledChunk { get; set; }
-        
-        private int ChunkCount = 0;
-        public int ChunksToSpawn = 3;
-        
-        void OnEnable()
-        {
-            TriggerExit.OnChunkExited += PickAndSpawnChunk;
-        }
+	public class LevelGenerator : MonoBehaviour
+	{
+		[SerializeField]
+		private ChunkGeneratorData GeneratorData;
+		[SerializeField]
+		private Transform ChunksParent;
 
-        private void OnDisable()
-        {
-            TriggerExit.OnChunkExited -= PickAndSpawnChunk;
-        }
-        
-        private void Start()
-        {
-            ChunksShuffleBag = new ShuffleBag<GameObject>();
-            for (int i = 0; i < GeneratorData.Chunks.Count; i++)
-            {
-                ChunksShuffleBag.Add(GeneratorData.Chunks[i].Chunk, GeneratorData.Chunks[i].NumberOfOccurances);
-            }
+		private ShuffleBag<GameObject> ChunksShuffleBag;
 
-            LevelPool = new ObjectPool<GameObject>();
+		private ObjectPool<GameObject> LevelPool { get; set; }
 
-            for (int i = 0; i < 50; i++)
-            {
-                LevelPool.Add(Instantiate(ChunksShuffleBag.Next(), Vector3.zero, Quaternion.identity, ChunksParent));
-            }
-            
-            for (int i = 0; i < ChunksToSpawn; i++)
-            {
-                PickAndSpawnChunk();   
-            }
-            
-        }
-        
-        void PickAndSpawnChunk()
-        {
-            PooledChunk = LevelPool.PickChunkFromPool();
+		private int ChunkCount = 0;
+		private int ChunksToSpawn = 2;
+		private int ChunkLength = 50;
+		// private int CurrentChunk = 0;
 
-            PooledChunk.transform.position = new Vector3(0, 0, ChunkCount * 100);
-            PooledChunk.SetActive(true);
-                
-            ChunkCount++;
-        }
+		private GameObject Player;
 
-        public void UpdateChunkCount()
-        {
-            ChunkCount = 3;
-        }
+		private void OnEnable()
+		{
+			TriggerExit.OnChunkExited += PickAndSpawnChunk;
+		}
+		private void OnDisable()
+		{
+			TriggerExit.OnChunkExited -= PickAndSpawnChunk;
+		}
+		private void Start()
+		{
 
-        /*private void Update()
-        {
-            if (Time.time > TimeForNextChunk)
-            {
-                TimeForNextChunk = Time.time + ChunkGenerationSpeed;
-                PooledChunk = LevelPool.PickChunkFromPool();
+			if (Player == null)
+			{
+				Player = GameObject.FindGameObjectWithTag("Player");
+			}
 
-                PooledChunk.transform.position = new Vector3(0, 0, ChunkCount * 100);
-                PooledChunk.SetActive(true);
-                
-                ChunkCount++;
-            }
-        }*/
-    }
+			ChunksShuffleBag = new ShuffleBag<GameObject>();
+			for (int i = 0; i < GeneratorData.Chunks.Count; i++)
+			{
+				ChunksShuffleBag.Add(GeneratorData.Chunks[i].Chunk, GeneratorData.Chunks[i].NumberOfOccurances);
+			}
+
+			LevelPool = new ObjectPool<GameObject>();
+
+			for (int i = 0; i < 50; i++)
+			{
+				var Object = Instantiate(ChunksShuffleBag.Next(), Vector3.zero, Quaternion.identity, ChunksParent);
+				Object.SetActive(false);
+				LevelPool.Add(Object);
+			}
+
+			for (int i = 0; i < ChunksToSpawn; i++)
+			{
+				PickAndSpawnChunk();
+			}
+
+		}
+		private void PickAndSpawnChunk()
+		{
+			int nextZPosition = ChunkCount * ChunkLength;
+			var PooledChunk = LevelPool.PickChunkFromPool();
+			// while (PooledChunk.activeSelf)
+			// {
+			// 	PooledChunk = LevelPool.PickChunkFromPool();
+			// }
+			PooledChunk.transform.position = new Vector3(0, 0, nextZPosition);
+			PooledChunk.SetActive(true);
+			ChunkCount++;
+		}
+		private void Update()
+		{
+			// ∂CurrentChunk = (int)Math.Floor(Player.transform.position.z / 100);
+			// Debug.Log("Current chunk is " + CurrentChunk + " - Z: " + Player.transform.position.z);
+		}
+
+
+		public void ResetChunkNumbers(int n = 0)
+		{
+			ChunkCount = n;
+		}
+	}
 }

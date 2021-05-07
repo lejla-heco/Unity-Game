@@ -12,7 +12,6 @@ namespace Spacecraft.Controllers.Core
         private void Update()
         {
             OnInputChanged?.Invoke();
-
         }
     }
 }

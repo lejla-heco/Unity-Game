@@ -16,13 +16,13 @@ public class FloatingOrigin : MonoBehaviour
         
         if (CameraPosition.z > Threshold)
         {
-            var Scene = SceneManager.GetActiveScene();
-            Vector3 PositionZ = new Vector3(0, 0, CameraParentZ);
-            foreach (GameObject g in Scene.GetRootGameObjects())
-            {
-                g.transform.position -= PositionZ;
-            }
-            LayoutGenerator.UpdateChunkCount();
+            // var Scene = SceneManager.GetActiveScene();
+            // Vector3 PositionZ = new Vector3(0, 0, CameraParentZ);
+            // foreach (GameObject g in Scene.GetRootGameObjects())
+            // {
+            //     g.transform.position -= PositionZ;
+            // }
+            // LayoutGenerator.UpdateChunkCount();
         }
 
     }

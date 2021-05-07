@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.63390476, g: 0.7139712, b: 0.74054754, a: 1}
+  m_IndirectSpecularColor: {r: 0.6339488, g: 0.7140159, b: 0.7405487, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 79014055}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -174,9 +174,10 @@ MonoBehaviour:
   ForwardSpeed: 7
   LaneChangeSpeed: 5
   CurrentPosition: 1
-  SlideLength: 3
-  CurrentAngle: {x: 0, y: 0, z: 0, w: 0}
   SlideSound: {fileID: 8300000, guid: 0a8141d8696493f47830b65cb965b1c6, type: 3}
+  SlideLength: 3
+  LevelGenerator: {fileID: 284645143}
+  CurrentAngle: {x: 0, y: 0, z: 0, w: 0}
 --- !u!143 &79014053
 CharacterController:
   m_ObjectHideFlags: 0
@@ -340,7 +341,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GeneratorData: {fileID: 11400000, guid: 7a32b98687b5c3c4bb5e6ca6a3763bb1, type: 2}
-  ChunkGenerationSpeed: 2
   ChunksParent: {fileID: 496819962}
   ChunksToSpawn: 3
 --- !u!1 &400845969
