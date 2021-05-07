@@ -153,7 +153,7 @@ namespace Spacecraft.Controllers.Player
 				}
 			}
 			transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-			LevelGenerator.ResetChunkNumbers(activeChildren);
+			LevelGenerator.ResetChunkNumbers(GameConsts.InitialChunksNumber);
 
 			Debug.Log("Active Children for reset: " + activeChildren);
 		}
