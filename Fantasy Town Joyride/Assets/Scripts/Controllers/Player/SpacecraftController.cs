@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Spacecraft.Consts;
@@ -28,7 +29,6 @@ namespace Spacecraft.Controllers.Player
 		private ShipAnimatorController ShipAnimator { get; set; }
 
 		private float x;
-		private GameObject Player;
 		private GameObject Level;
 		private float NewHorizontalValue;
 
@@ -40,18 +40,11 @@ namespace Spacecraft.Controllers.Player
 		[SerializeField] private Quaternion CurrentAngle;
 		private CharacterController CharacterControl;
 
-		const KeyCode Up = KeyCode.UpArrow;
-		const KeyCode Down = KeyCode.DownArrow;
-		const KeyCode Right = KeyCode.RightArrow;
-		const KeyCode Left = KeyCode.LeftArrow;
-
 		private void Start()
 		{
-			Player = transform.GetChild(0).gameObject; // why do we need this?
-
 			transform.position = Vector3.zero;
 			CurrentAngle = IdleAngle;
-			ShipAnimator = Player.GetComponent<ShipAnimatorController>();
+			ShipAnimator = GetComponent<ShipAnimatorController>();
 			CharacterControl = GetComponent<CharacterController>();
 			InputManager.OnInputChanged += OnInputChanged;
 
@@ -64,68 +57,64 @@ namespace Spacecraft.Controllers.Player
 
 		private void OnInputChanged()
 		{
-
 			if (IsPaused)
 			{
 				Debug.Log("Umro je");
 				return;
 			}
 
-			if (Input.GetKeyDown(Left))
+			if (Input.GetButtonUp("Horizontal")) CurrentAngle = IdleAngle;
+
+			if (Input.GetButtonDown("Horizontal"))
 			{
-				if (CurrentPosition == LANE.Middle)
-				{
-					NewHorizontalValue = -SlideLength;
-					CurrentPosition = LANE.Left;
-				}
-				else if (CurrentPosition == LANE.Right)
-				{
-					NewHorizontalValue = 0;
-					CurrentPosition = LANE.Middle;
+				bool IsMovingLeft = Input.GetAxis("Horizontal") < 0;
 
-				}
-				PlaySlideSound();
-			}
-			else if (Input.GetKeyDown(Right))
-			{
-				if (CurrentPosition == LANE.Middle)
+				switch (CurrentPosition)
 				{
-					NewHorizontalValue = SlideLength;
-					CurrentPosition = LANE.Right;
+					case LANE.Middle:
+						NewHorizontalValue = SlideLength * (IsMovingLeft ? -1 : 1);
+						CurrentPosition = NewHorizontalValue < 0 ? LANE.Left : LANE.Right;
+						CurrentAngle = IsMovingLeft ? TiltAngleLeft : TiltAngleRight;
+						break;
+					case LANE.Right:
+						CurrentAngle = IdleAngle;
+						if (!IsMovingLeft) break;
+						NewHorizontalValue = 0;
+						CurrentPosition = LANE.Middle;
+						CurrentAngle = TiltAngleLeft;
+						break;
+					case LANE.Left:
+						CurrentAngle = IdleAngle;
+						if (IsMovingLeft) break;
+						NewHorizontalValue = 0;
+						CurrentPosition = LANE.Middle;
+						CurrentAngle = TiltAngleRight;
+						break;
 				}
-				else if (CurrentPosition == LANE.Left)
-				{
-					NewHorizontalValue = 0;
-					CurrentPosition = LANE.Middle;
 
-				}
-				PlaySlideSound();
-			}
-
-
-			if (Input.GetKeyDown(Up))
-			{
-				ShipAnimator.TriggerMoveUp();
 				PlaySlideSound();
 			}
 
-			if (Input.GetKeyDown(Down))
+
+			if (Input.GetButtonDown("Vertical"))
 			{
-				ShipAnimator.TriggerMoveDown();
+				if (Input.GetAxis("Vertical") > 0)
+				{
+					ShipAnimator.TriggerMoveUp();
+				}
+				else
+				{
+					ShipAnimator.TriggerMoveDown();
+				}
 				PlaySlideSound();
 			}
-
 
 			x = Mathf.Lerp(x, NewHorizontalValue, Time.deltaTime * LaneChangeSpeed);
+			CharacterControl.Move(
+				new Vector3(x - transform.position.x, 0, ForwardSpeed * Time.deltaTime)
+			);
 
-			Vector3 movePlayer = new Vector3(x - transform.position.x, 0, ForwardSpeed * Time.deltaTime);
-			CharacterControl.Move(movePlayer);
-
-
-			if (Input.GetKeyDown(Left)) CurrentAngle = TiltAngleLeft;
-			if (Input.GetKeyDown(Right)) CurrentAngle = TiltAngleRight;
-			if (Input.GetKeyUp(Left) || Input.GetKeyUp(Right)) CurrentAngle = IdleAngle;
-			transform.rotation = Quaternion.Slerp(this.transform.rotation, CurrentAngle, 0.1f);
+			transform.rotation = Quaternion.Slerp(transform.rotation, CurrentAngle, 0.1f);
 
 			if (transform.position.z > GameConsts.HowManyUnitsUntilWorldResets) // this code resets player and map
 			{
@@ -152,10 +141,9 @@ namespace Spacecraft.Controllers.Player
 					activeChildren++;
 				}
 			}
-			transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+			var position = transform.position;
+			transform.position = new Vector3(position.x, position.y, 0);
 			LevelGenerator.ResetChunkNumbers(GameConsts.InitialChunksNumber);
-
-			Debug.Log("Active Children for reset: " + activeChildren);
 		}
 	}
 }
