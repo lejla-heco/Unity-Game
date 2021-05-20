@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.6339488, g: 0.7140159, b: 0.7405487, a: 1}
+  m_IndirectSpecularColor: {r: 0.63390476, g: 0.7139712, b: 0.74054754, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 79014053}
   - component: {fileID: 79014054}
   - component: {fileID: 79014055}
+  - component: {fileID: 79014056}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -222,6 +223,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CoinPickUpSound: {fileID: 8300000, guid: 08e1cf5d46d3d034eb930ce0f8e7850b, type: 3}
   CollectedCoins: {fileID: 668796868}
+--- !u!114 &79014056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79014050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff872f83fc8004741a66029ce1c7a8d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &80990467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -342,7 +355,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GeneratorData: {fileID: 11400000, guid: 7a32b98687b5c3c4bb5e6ca6a3763bb1, type: 2}
   ChunksParent: {fileID: 496819962}
-  ChunksToSpawn: 3
 --- !u!1 &400845969
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 11.999908, y: -9}
+  m_AnchoredPosition: {x: 11.999878, y: -9}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &668796868
@@ -957,7 +969,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -7}
+  m_LocalPosition: {x: 0, y: 1.25, z: -5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1898378212}

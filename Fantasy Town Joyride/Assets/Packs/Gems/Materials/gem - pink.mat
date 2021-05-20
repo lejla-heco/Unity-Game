@@ -36,6 +36,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _Dist: 100
     - _Emission: 0
     - _Emissive: 0
     - _EnvironmentLight: 1.5
@@ -43,6 +44,7 @@ Material:
     - _ReflectionStrength: 1.75
     m_Colors:
     - _Color: {r: 1, g: 0, b: 1, a: 1}
+    - _QOffset: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!1002 &2100001
 EditorExtensionImpl:

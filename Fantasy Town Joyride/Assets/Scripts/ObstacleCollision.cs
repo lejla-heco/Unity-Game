@@ -8,23 +8,26 @@ using UnityEngine.UIElements;
 
 namespace Spacecraft
 {
-    public class ObstracleCollision : TrackedEntity
+    public class ObstacleCollision : TrackedEntity
     {
         //public ParticleSystem ps;
         //[SerializeField]
         //private SpacecraftController Movement;
         public static bool gameOver = false;
-        private static int lives = 3;
+        private int lives = 3;
         //public Text livesText;
         
         private void OnTriggerEnter(Collider other)
         {
-            SpacecraftTag spacecraftTag = other.GetComponent<SpacecraftTag>();
-            if (spacecraftTag != null)
+            if (other.gameObject.CompareTag("Obstacle"))
             {
                 LoseLife();
                 Debug.Log("Ima zivota = " + lives);
                 
+            }
+            else if (other.gameObject.CompareTag("GasTank"))
+            {
+                Die();
             }
         }
        
@@ -32,10 +35,9 @@ namespace Spacecraft
         public void LoseLife()
         {
             lives--;
-            //livesText.text = "Lives: " + lives;
             if (lives == 0)
             {
-                // Die();
+               Die();
             }
         }
         private void Die()
