@@ -235,6 +235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff872f83fc8004741a66029ce1c7a8d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstLife: {fileID: 746147892}
+  secondLife: {fileID: 549884274}
+  thirdLife: {fileID: 1783909628}
 --- !u!1001 &80990467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1142,7 +1145,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1611440709}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9c923889afff749439c896b4b0ecd10b, type: 3}

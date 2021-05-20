@@ -2,6 +2,7 @@ using System.Collections;
 using Spacecraft.Controllers.Core.LevelGenerator;
 using System.Collections.Generic;
 using Spacecraft.Controllers.Core.Entities;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -15,6 +16,10 @@ namespace Spacecraft
         //private SpacecraftController Movement;
         public static bool gameOver = false;
         private int lives = 3;
+
+        [SerializeField] private RawImage firstLife;
+        [SerializeField] private RawImage secondLife;
+        [SerializeField] private RawImage thirdLife;
         //public Text livesText;
         
         private void OnTriggerEnter(Collider other)
@@ -27,6 +32,9 @@ namespace Spacecraft
             }
             else if (other.gameObject.CompareTag("GasTank"))
             {
+                firstLife.color = Color.black;
+                secondLife.color = Color.black;
+                thirdLife.color = Color.black;
                 Die();
             }
         }
@@ -35,9 +43,12 @@ namespace Spacecraft
         public void LoseLife()
         {
             lives--;
-            if (lives == 0)
+            if (lives == 2) firstLife.color = Color.black;
+            else if (lives == 1) secondLife.color = Color.black;
+            else if (lives == 0)
             {
-               Die();
+                thirdLife.color = Color.black;
+                Die();
             }
         }
         private void Die()
