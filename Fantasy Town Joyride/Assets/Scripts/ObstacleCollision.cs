@@ -20,11 +20,11 @@ namespace Spacecraft
         [SerializeField] private RawImage firstLife;
         [SerializeField] private RawImage secondLife;
         [SerializeField] private RawImage thirdLife;
-        //public Text livesText;
-        
+
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Obstacle"))
+            if (other.gameObject.CompareTag("Barrel") || other.gameObject.CompareTag("Rock") ||
+                other.gameObject.CompareTag("Tree")  || other.gameObject.CompareTag("StreetSign"))
             {
                 LoseLife();
                 Debug.Log("Ima zivota = " + lives);
