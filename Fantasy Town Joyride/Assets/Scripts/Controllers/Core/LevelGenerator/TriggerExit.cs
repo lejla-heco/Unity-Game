@@ -10,42 +10,21 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 
 		public delegate void ExitAction();
 		public static event ExitAction OnChunkExited;
-
-		private bool Exited = false;
-
-		private GameObject Player;
-
-		private void Start()
-		{
-			Player = GameObject.Find("Player");
-		}
-
 		private void OnTriggerExit(Collider other)
 		{
-			Debug.Log("On Trigger Exi - Player Position: " + Player.transform.position.z);
-			SpacecraftTag spacecraftTag = other.GetComponent<SpacecraftTag>();
-			if (spacecraftTag != null)
+			if (other.gameObject.CompareTag("ExitTrigger"))
 			{
-				if (!Exited)
-				{
-					Exited = true;
 					OnChunkExited();
-					StartCoroutine(WaitAndDeactivate());
-				}
+					StartCoroutine(WaitAndDeactivate(other.gameObject));
+					Debug.Log("generisi novi");
 			}
 		}
 
-		IEnumerator WaitAndDeactivate()
+		IEnumerator WaitAndDeactivate(GameObject other)
 		{
 			yield return new WaitForSeconds(Delay);
-
-			//transform.root.gameObject.SetActive(false);
-			transform.parent.gameObject.SetActive(false);
-			// Debug.Log("I should destroy current exiting game object now");
-			// Destroy(gameObject);
+			other.transform.parent.gameObject.SetActive(false);
 		}
-
-
-
+		
 	}
 }
