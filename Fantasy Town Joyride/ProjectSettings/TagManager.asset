@@ -12,6 +12,10 @@ TagManager:
   - Tree
   - StreetSign
   - Rock
+  - Barrel
+  - Obstracle
+  - Hidrant
+  - ExitTrigger
   layers:
   - Default
   - TransparentFX

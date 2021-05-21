@@ -23,7 +23,7 @@ namespace Spacecraft
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Barrel") || other.gameObject.CompareTag("Rock") ||
+            if (other.gameObject.CompareTag("Barrel") || other.gameObject.CompareTag("Hidrant") ||
                 other.gameObject.CompareTag("Tree")  || other.gameObject.CompareTag("StreetSign"))
             {
                 LoseLife();
