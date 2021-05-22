@@ -21,7 +21,6 @@ namespace Spacecraft.Controllers.Player
 
 		[SerializeField] private InputManagement InputManager;
 		[SerializeField] [Range(0.1f, 100f)] private float ForwardSpeed;
-		[SerializeField] [Range(0.1f, 20f)] private float LaneChangeSpeed;
 		[SerializeField] private LANE CurrentPosition = LANE.Middle;
 		[SerializeField] private AudioClip SlideSound;
 		[SerializeField] private float SlideLength;
@@ -33,8 +32,8 @@ namespace Spacecraft.Controllers.Player
 		private float NewHorizontalValue;
 		private const int DefaultShipYPosition = 1;
 		private Vector3 PlayerVelocity;
-		private float jumpHeight = 1.0f;
-		private float gravityValue = -9.81f;
+		private float JumpHeight = 1.0f;
+		private float LaneChangeSpeed = 3f;
 
 		//angles:
 		private Quaternion TiltAngleRight = Quaternion.Euler(0, 0, -30);
@@ -109,8 +108,9 @@ namespace Spacecraft.Controllers.Player
 			{
 				if (Input.GetAxis("Vertical") > 0 && IsGrounded)
 				{
+					PlayerVelocity.y += Mathf.Sqrt(JumpHeight * -1.0f * GameConsts.GravityValue);
+					Debug.Log(Mathf.Sqrt(JumpHeight * -1.0f * GameConsts.GravityValue));
 					ShipAnimator.TriggerMoveUp();
-					PlayerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
 				}
 				else
 				{
@@ -120,14 +120,15 @@ namespace Spacecraft.Controllers.Player
 				PlaySlideSound();
 			}
 
-			Debug.Log(transform.position.y);
 
-			PlayerVelocity.x = Mathf.Lerp(x, NewHorizontalValue, LaneChangeSpeed * Time.deltaTime) - transform.position.x;
-			PlayerVelocity.y += gravityValue * Time.deltaTime;
-			PlayerVelocity.z = ForwardSpeed;
+			x = Mathf.Lerp(x, NewHorizontalValue, LaneChangeSpeed * Time.deltaTime);
+			PlayerVelocity.x = x - transform.position.x;
 
+			PlayerVelocity.y = 0; //+= GameConsts.GravityValue * Time.deltaTime;
+			PlayerVelocity.z = ForwardSpeed * Time.deltaTime;
+			// Debug.Log(PlayerVelocity.y);
 			CharacterControl.Move(
-				PlayerVelocity * Time.deltaTime
+				PlayerVelocity
 			);
 
 			transform.rotation = Quaternion.Slerp(transform.rotation, CurrentAngle, 0.1f);
@@ -136,6 +137,8 @@ namespace Spacecraft.Controllers.Player
 			{
 				ResetObjectsToOrigin();
 			}
+
+			// Debug.Log(transform.position.y + " - " + transform.GetChild(0).gameObject.transform.position.y);
 		}
 
 		private void PlaySlideSound()

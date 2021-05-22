@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.63390476, g: 0.7139712, b: 0.74054754, a: 1}
+  m_IndirectSpecularColor: {r: 0.6339488, g: 0.7140159, b: 0.7405487, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -134,9 +134,7 @@ GameObject:
   - component: {fileID: 79014051}
   - component: {fileID: 79014052}
   - component: {fileID: 79014053}
-  - component: {fileID: 79014054}
   - component: {fileID: 79014055}
-  - component: {fileID: 79014056}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -173,7 +171,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InputManager: {fileID: 926544532}
   ForwardSpeed: 7
-  LaneChangeSpeed: 5
   CurrentPosition: 1
   SlideSound: {fileID: 8300000, guid: 0a8141d8696493f47830b65cb965b1c6, type: 3}
   SlideLength: 3
@@ -197,18 +194,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &79014054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 79014050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c89b75881133112419c1cdd6a3a9c4a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &79014055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,21 +208,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CoinPickUpSound: {fileID: 8300000, guid: 08e1cf5d46d3d034eb930ce0f8e7850b, type: 3}
   CollectedCoins: {fileID: 668796868}
---- !u!114 &79014056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 79014050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff872f83fc8004741a66029ce1c7a8d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firstLife: {fileID: 746147892}
-  secondLife: {fileID: 549884274}
-  thirdLife: {fileID: 1783909628}
 --- !u!1001 &80990467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -304,6 +274,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: craft_speederA
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 38b6c3ddcb16a7b48bc819a68c7e59c9,
+        type: 3}
+      propertyPath: m_TagString
+      value: SpacecraftObject
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38b6c3ddcb16a7b48bc819a68c7e59c9, type: 3}
@@ -1090,6 +1065,34 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 80990467}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1522416495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522416494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff872f83fc8004741a66029ce1c7a8d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstLife: {fileID: 0}
+  secondLife: {fileID: 0}
+  thirdLife: {fileID: 0}
+--- !u!65 &1522416496
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522416494}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9999999, y: 0.79999995, z: 2.1}
+  m_Center: {x: 0, y: 0.39999998, z: 0}
 --- !u!95 &1522416497
 Animator:
   serializedVersion: 3
@@ -1121,6 +1124,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7cb5d04a5a6da54597361d8396ccdd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1522416499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522416494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff872f83fc8004741a66029ce1c7a8d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstLife: {fileID: 746147892}
+  secondLife: {fileID: 549884274}
+  thirdLife: {fileID: 1783909628}
 --- !u!1 &1611440709
 GameObject:
   m_ObjectHideFlags: 0
