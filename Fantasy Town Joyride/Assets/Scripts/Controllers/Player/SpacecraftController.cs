@@ -31,6 +31,10 @@ namespace Spacecraft.Controllers.Player
 		private float x;
 		private GameObject Level;
 		private float NewHorizontalValue;
+		private const int DefaultShipYPosition = 1;
+		private Vector3 PlayerVelocity;
+		private float jumpHeight = 1.0f;
+		private float gravityValue = -9.81f;
 
 		//angles:
 		private Quaternion TiltAngleRight = Quaternion.Euler(0, 0, -30);
@@ -44,7 +48,7 @@ namespace Spacecraft.Controllers.Player
 		{
 			transform.position = Vector3.zero;
 			CurrentAngle = IdleAngle;
-			ShipAnimator = GetComponent<ShipAnimatorController>();
+			ShipAnimator = transform.GetChild(0).gameObject.GetComponent<ShipAnimatorController>();
 			CharacterControl = GetComponent<CharacterController>();
 			InputManager.OnInputChanged += OnInputChanged;
 
@@ -57,11 +61,11 @@ namespace Spacecraft.Controllers.Player
 
 		private void OnInputChanged()
 		{
-			if (IsPaused)
-			{
-				Debug.Log("Umro je");
-				return;
-			}
+			// if (IsPaused)
+			// {
+			// 	Debug.Log("Umro je");
+			// 	return;
+			// }
 
 			if (Input.GetButtonUp("Horizontal")) CurrentAngle = IdleAngle;
 
@@ -95,23 +99,35 @@ namespace Spacecraft.Controllers.Player
 				PlaySlideSound();
 			}
 
+			var IsGrounded = DefaultShipYPosition == (int)Math.Round(transform.position.y);
+			if (IsGrounded && PlayerVelocity.y < 0) // check if player is grounded and jump value goes below 0 and set it to 0
+			{
+				PlayerVelocity.y = 0f;
+			}
 
 			if (Input.GetButtonDown("Vertical"))
 			{
-				if (Input.GetAxis("Vertical") > 0)
+				if (Input.GetAxis("Vertical") > 0 && IsGrounded)
 				{
 					ShipAnimator.TriggerMoveUp();
+					PlayerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
 				}
 				else
 				{
 					ShipAnimator.TriggerMoveDown();
 				}
+
 				PlaySlideSound();
 			}
 
-			x = Mathf.Lerp(x, NewHorizontalValue, Time.deltaTime * LaneChangeSpeed);
+			Debug.Log(transform.position.y);
+
+			PlayerVelocity.x = Mathf.Lerp(x, NewHorizontalValue, LaneChangeSpeed * Time.deltaTime) - transform.position.x;
+			PlayerVelocity.y += gravityValue * Time.deltaTime;
+			PlayerVelocity.z = ForwardSpeed;
+
 			CharacterControl.Move(
-				new Vector3(x - transform.position.x, 0, ForwardSpeed * Time.deltaTime)
+				PlayerVelocity * Time.deltaTime
 			);
 
 			transform.rotation = Quaternion.Slerp(transform.rotation, CurrentAngle, 0.1f);
