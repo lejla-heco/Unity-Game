@@ -22,18 +22,12 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 					Exited = true;
 					OnChunkExited();
 					WaitAndDeactivate();
-					//	StartCoroutine(WaitAndDeactivate());
 				}
-
-
 			}
 		}
 
 		void WaitAndDeactivate()
 		{
-			// yield return new WaitForSeconds(Delay);
-
-			//transform.root.gameObject.SetActive(false);
 			transform.parent.gameObject.SetActive(false);
 		}
 

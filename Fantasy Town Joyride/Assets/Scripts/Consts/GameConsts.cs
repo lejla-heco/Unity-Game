@@ -1,3 +1,4 @@
+using System;
 namespace Spacecraft.Consts
 {
 	public static class GameConsts
@@ -8,5 +9,8 @@ namespace Spacecraft.Consts
 		public static float GravityValue = -9.81f;
 
 		public static int HowManyUnitsUntilWorldResets = 300;
+
+		public static Random Rnd = new Random();
+
 	}
 }

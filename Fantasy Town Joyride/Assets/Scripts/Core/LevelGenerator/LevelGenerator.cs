@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Spacecraft.Consts;
 using Spacecraft.ScriptableObjects;
 using UnityEngine;
@@ -6,8 +7,14 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 {
 	public class LevelGenerator : MonoBehaviour
 	{
-		[SerializeField] private ChunkGeneratorData GeneratorData;
-		[SerializeField] private Transform ChunksParent;
+		[SerializeField]
+		private ChunkGeneratorData GeneratorData;
+		[SerializeField]
+		private Transform ChunksParent;
+		[SerializeField]
+		private ObstacleCollection Obstacles;
+		[SerializeField]
+		private GameObject DefaultLevelChunk;
 
 		private ShuffleBag<GameObject> ChunksShuffleBag;
 		private ObjectPool<GameObject> LevelPool { get; set; }
@@ -24,21 +31,23 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 		}
 		private void Start()
 		{
-			ChunksShuffleBag = new ShuffleBag<GameObject>();
-			foreach (var ChunkData in GeneratorData.Chunks)
-			{
-				ChunksShuffleBag.Add(ChunkData.Chunk, ChunkData.NumberOfOccurances);
-			}
-
 
 			LevelPool = new ObjectPool<GameObject>();
 
-			for (int i = 0; i < 50; i++)
+			for (int i = 0; i < 8; i++) // how many level segments we want
 			{
-				var Object = Instantiate(ChunksShuffleBag.Next(), Vector3.zero, Quaternion.identity, ChunksParent);
-				Object.SetActive(false);
-				LevelPool.Add(Object);
+				// take empty chunk and generate obstacles on it
+				var Segment = Instantiate(DefaultLevelChunk);
+				for (int j = 0; j < 10; j++)
+				{
+					var NextIndex = GameConsts.Rnd.Next(Obstacles.Items.Count);
+					Debug.Log(NextIndex);
+					Instantiate(Obstacles.Items[NextIndex].Data, new Vector3(0, 0, 15 * j), Quaternion.identity, Segment.transform);
+				}
+				Segment.SetActive(false);
+				LevelPool.Add(Segment);
 			}
+
 
 			for (int i = 0; i < GameConsts.InitialChunksNumber; i++)
 			{
@@ -49,7 +58,6 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 		private void PickAndSpawnChunk()
 		{
 			var PooledChunk = LevelPool.PickChunkFromPool();
-			Debug.Log("About to spawn chunk at: " + (ActiveChunkCount * GameConsts.ChunkLength) + GameConsts.ChunkGenerationOffset);
 			PooledChunk.transform.position = new Vector3(0, 0, (ActiveChunkCount * GameConsts.ChunkLength) + GameConsts.ChunkGenerationOffset);
 			PooledChunk.SetActive(true);
 			ActiveChunkCount++;
@@ -58,6 +66,13 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 		public void ResetChunkNumbers(int n = 0)
 		{
 			ActiveChunkCount = n;
+		}
+
+
+
+		private GameObject GenerateObstaclesOnChunk(GameObject Chunk, int Difficulty = 1)
+		{
+			return Chunk;
 		}
 	}
 }
