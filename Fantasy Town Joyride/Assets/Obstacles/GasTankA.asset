@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: GasTankA
   m_EditorClassIdentifier: 
   Data: {fileID: 3161220981922230988, guid: af69890438fb10145b34f1022115329e, type: 3}
-  DefaultZPosition: 0
+  Rotation: {x: 0, y: 0, z: 0}
+  Tag: GasTank

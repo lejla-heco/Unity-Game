@@ -17,6 +17,7 @@ TagManager:
   - Hidrant
   - ExitTrigger
   - SpacecraftObject
+  - RoadBlock
   layers:
   - Default
   - TransparentFX

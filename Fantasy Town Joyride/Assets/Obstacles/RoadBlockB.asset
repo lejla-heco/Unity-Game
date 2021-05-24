@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 3372253157872977756, guid: 183e90fe7ccd08f4bb22582b5c91ed61, type: 3}
   Rotation: {x: -90, y: 0, z: 90}
+  Tag: RoadBlock

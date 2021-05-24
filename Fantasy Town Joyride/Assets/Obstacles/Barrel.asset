@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Barrel
   m_EditorClassIdentifier: 
   Data: {fileID: 7888724235420621836, guid: 6b5f017f1ac5f2042ab6635d82e7c333, type: 3}
-  DefaultZPosition: 0
+  Rotation: {x: 0, y: 0, z: 0}
+  Tag: Barrel

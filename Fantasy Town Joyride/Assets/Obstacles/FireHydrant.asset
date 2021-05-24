@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 3524919392730036807, guid: 423c16fcae19be3409adc522b04fa2a5, type: 3}
   Rotation: {x: -90, y: 0, z: 0}
+  Tag: Hidrant
