@@ -23,7 +23,6 @@ namespace Spacecraft
 
 		private void OnTriggerEnter(Collider other)
 		{
-			Debug.Log("heere we are " + other.gameObject.tag);
 			if (other.gameObject.CompareTag("Barrel") || other.gameObject.CompareTag("Hidrant") ||
 			    other.gameObject.CompareTag("Tree") || other.gameObject.CompareTag("StreetSign"))
 			{
