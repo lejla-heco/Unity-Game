@@ -7,14 +7,19 @@ namespace Spacecraft.ScriptableObjects
 	public class Obstacle : ScriptableObject
 	{
 		[SerializeField]
-		public GameObject Data;
+		private GameObject Data;
 
 		[SerializeField]
-		private int DefaultZPosition;
+		private Vector3 Rotation;
 
 		public GameObject GetObject()
 		{
-			return Instantiate(Data);
+			return Data;
+		}
+
+		public Quaternion GetRotation()
+		{
+			return Quaternion.Euler(Rotation);
 		}
 	}
 }

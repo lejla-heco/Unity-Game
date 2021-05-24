@@ -134,6 +134,7 @@ namespace Spacecraft.Controllers.Player
 
 			if (transform.position.z > (GameConsts.HowManyUnitsUntilWorldResets + GameConsts.ChunkGenerationOffset)) // this code resets player and the map
 			{
+				Debug.Log("Reset");
 				ResetObjectsToOrigin();
 			}
 		}
@@ -145,22 +146,22 @@ namespace Spacecraft.Controllers.Player
 
 		private void ResetObjectsToOrigin()
 		{
-			int activeChildren = 0;
+			int ActiveChildren = 0;
 			// move all active child objects
 			for (int i = 0; i < Level.transform.childCount; i++)
 			{
 				Transform child = Level.transform.GetChild(i);
 				if (child.gameObject.activeSelf)
 				{
-					var localPosition = child.localPosition;
-					child.localPosition = new Vector3(localPosition.x, localPosition.y, (activeChildren * GameConsts.ChunkLength) + GameConsts.ChunkGenerationOffset);
-					activeChildren++;
+					var LocalPosition = child.localPosition;
+					child.localPosition = new Vector3(LocalPosition.x, LocalPosition.y, (ActiveChildren * GameConsts.ChunkLength) + GameConsts.ChunkGenerationOffset);
+					ActiveChildren++;
 				}
 			}
 			// return player to 0
 			// TODO ovdje zapne malo igrac zbog vremenske razlike kada se vrate chunkovi mape i kada se vrati igrac
-			var position = transform.position;
-			transform.position = new Vector3(position.x, position.y, 0 + GameConsts.ChunkGenerationOffset);
+			var Position = transform.position;
+			transform.position = new Vector3(Position.x, Position.y, 0 + GameConsts.ChunkGenerationOffset);
 			LevelGenerator.ResetChunkNumbers(GameConsts.InitialChunksNumber); // reset chunk numbers for calc
 		}
 	}

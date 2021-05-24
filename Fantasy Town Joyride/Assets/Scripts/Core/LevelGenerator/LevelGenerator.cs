@@ -8,18 +8,19 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 	public class LevelGenerator : MonoBehaviour
 	{
 		[SerializeField]
-		private ChunkGeneratorData GeneratorData;
-		[SerializeField]
 		private Transform ChunksParent;
 		[SerializeField]
 		private ObstacleCollection Obstacles;
 		[SerializeField]
 		private GameObject DefaultLevelChunk;
 
-		private ShuffleBag<GameObject> ChunksShuffleBag;
 		private ObjectPool<GameObject> LevelPool { get; set; }
 
 		private int ActiveChunkCount = 0;
+		private float[] Lanes =
+		{
+			3.4f, 0, -3
+		};
 
 		private void OnEnable()
 		{
@@ -36,16 +37,10 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 
 			for (int i = 0; i < 8; i++) // how many level segments we want
 			{
-				// take empty chunk and generate obstacles on it
-				var Segment = Instantiate(DefaultLevelChunk);
-				for (int j = 0; j < 10; j++)
-				{
-					var NextIndex = GameConsts.Rnd.Next(Obstacles.Items.Count);
-					Debug.Log(NextIndex);
-					Instantiate(Obstacles.Items[NextIndex].Data, new Vector3(0, 0, 15 * j), Quaternion.identity, Segment.transform);
-				}
-				Segment.SetActive(false);
-				LevelPool.Add(Segment);
+				// take an empty chunk and generate obstacles on it
+				LevelPool.Add(GenerateObstaclesOnChunk(
+					Instantiate(DefaultLevelChunk, Vector3.zero, Quaternion.identity, ChunksParent
+					)));
 			}
 
 
@@ -60,6 +55,7 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 			var PooledChunk = LevelPool.PickChunkFromPool();
 			PooledChunk.transform.position = new Vector3(0, 0, (ActiveChunkCount * GameConsts.ChunkLength) + GameConsts.ChunkGenerationOffset);
 			PooledChunk.SetActive(true);
+			Debug.Log("ActiveChunkCount: " + ActiveChunkCount);
 			ActiveChunkCount++;
 		}
 
@@ -69,10 +65,23 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 		}
 
 
-
-		private GameObject GenerateObstaclesOnChunk(GameObject Chunk, int Difficulty = 1)
+		private GameObject GenerateObstaclesOnChunk(GameObject chunk)
 		{
-			return Chunk;
+			for (int j = 0; j < 6; j++) // sada je 6 zbog toga sto je razmak 15 izmedju svake -> 6 * 15 = 90 a duzina chunk-a je 100
+			{
+				var NextIndex = GameConsts.Rnd.Next(Obstacles.Items.Count);
+				var NextLane = GameConsts.Rnd.Next(Lanes.Length);
+				var Obstacle = Obstacles.Items[NextIndex];
+
+				Instantiate(
+					Obstacle.GetObject(),
+					new Vector3(Lanes[NextLane], 0, 15 * j - 50),
+					Obstacle.GetRotation(),
+					chunk.transform);
+			}
+
+			chunk.SetActive(false);
+			return chunk;
 		}
 	}
 }
