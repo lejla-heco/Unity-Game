@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InputManager: {fileID: 926544532}
-  ForwardSpeed: 7
+  ForwardSpeed: 15
   CurrentPosition: 1
   SlideSound: {fileID: 8300000, guid: 0a8141d8696493f47830b65cb965b1c6, type: 3}
   SlideLength: 3

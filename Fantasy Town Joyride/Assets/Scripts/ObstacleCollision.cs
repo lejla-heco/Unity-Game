@@ -27,7 +27,7 @@ namespace Spacecraft
 			    other.gameObject.CompareTag("Tree") || other.gameObject.CompareTag("StreetSign"))
 			{
 				LoseLife();
-				Debug.Log("Ima zivota = " + lives);
+				// Debug.Log("Ima zivota = " + lives);
 
 			}
 			else if (other.gameObject.CompareTag("GasTank"))

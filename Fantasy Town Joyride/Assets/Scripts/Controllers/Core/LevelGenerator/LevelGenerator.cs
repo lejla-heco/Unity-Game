@@ -49,6 +49,7 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 		private void PickAndSpawnChunk()
 		{
 			var PooledChunk = LevelPool.PickChunkFromPool();
+			Debug.Log("About to spawn chunk at: " + (ActiveChunkCount * GameConsts.ChunkLength) + GameConsts.ChunkGenerationOffset);
 			PooledChunk.transform.position = new Vector3(0, 0, (ActiveChunkCount * GameConsts.ChunkLength) + GameConsts.ChunkGenerationOffset);
 			PooledChunk.SetActive(true);
 			ActiveChunkCount++;

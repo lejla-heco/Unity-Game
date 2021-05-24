@@ -21,19 +21,20 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 				{
 					Exited = true;
 					OnChunkExited();
-					StartCoroutine(WaitAndDeactivate());
+					WaitAndDeactivate();
+					//	StartCoroutine(WaitAndDeactivate());
 				}
 
 
 			}
 		}
 
-		IEnumerator WaitAndDeactivate()
+		void WaitAndDeactivate()
 		{
-			yield return new WaitForSeconds(Delay);
+			// yield return new WaitForSeconds(Delay);
 
 			//transform.root.gameObject.SetActive(false);
-			this.transform.parent.gameObject.SetActive(false);
+			transform.parent.gameObject.SetActive(false);
 		}
 
 	}

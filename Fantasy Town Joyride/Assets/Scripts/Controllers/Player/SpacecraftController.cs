@@ -109,7 +109,6 @@ namespace Spacecraft.Controllers.Player
 				if (Input.GetAxis("Vertical") > 0 && IsGrounded)
 				{
 					PlayerVelocity.y += Mathf.Sqrt(JumpHeight * -1.0f * GameConsts.GravityValue);
-					Debug.Log(Mathf.Sqrt(JumpHeight * -1.0f * GameConsts.GravityValue));
 					ShipAnimator.TriggerMoveUp();
 				}
 				else
@@ -126,19 +125,17 @@ namespace Spacecraft.Controllers.Player
 
 			PlayerVelocity.y = 0; //+= GameConsts.GravityValue * Time.deltaTime;
 			PlayerVelocity.z = ForwardSpeed * Time.deltaTime;
-			// Debug.Log(PlayerVelocity.y);
+
 			CharacterControl.Move(
 				PlayerVelocity
 			);
 
 			transform.rotation = Quaternion.Slerp(transform.rotation, CurrentAngle, 0.1f);
 
-			if (transform.position.z > GameConsts.HowManyUnitsUntilWorldResets) // this code resets player and map
+			if (transform.position.z > (GameConsts.HowManyUnitsUntilWorldResets + GameConsts.ChunkGenerationOffset)) // this code resets player and the map
 			{
 				ResetObjectsToOrigin();
 			}
-
-			// Debug.Log(transform.position.y + " - " + transform.GetChild(0).gameObject.transform.position.y);
 		}
 
 		private void PlaySlideSound()
@@ -160,9 +157,11 @@ namespace Spacecraft.Controllers.Player
 					activeChildren++;
 				}
 			}
+			// return player to 0
+			// TODO ovdje zapne malo igrac zbog vremenske razlike kada se vrate chunkovi mape i kada se vrati igrac
 			var position = transform.position;
-			transform.position = new Vector3(position.x, position.y, 0);
-			LevelGenerator.ResetChunkNumbers(GameConsts.InitialChunksNumber);
+			transform.position = new Vector3(position.x, position.y, 0 + GameConsts.ChunkGenerationOffset);
+			LevelGenerator.ResetChunkNumbers(GameConsts.InitialChunksNumber); // reset chunk numbers for calc
 		}
 	}
 }
