@@ -127,18 +127,18 @@ namespace Spacecraft.Controllers.Player
 
 			PlayerVelocity.y = 0; //+= GameConsts.GravityValue * Time.deltaTime;
 			PlayerVelocity.z = ForwardSpeed * Time.fixedDeltaTime;
-
-			transform.rotation = Quaternion.Slerp(transform.rotation, CurrentAngle, 0.1f);
+			
 
 			if (transform.position.z > (GameConsts.HowManyUnitsUntilWorldResets + GameConsts.ChunkGenerationOffset)) // this code resets player and the map
 			{
-				Debug.Log("Reset");
 				ResetOriginFlag = true;
 			}
 		}
 
 		private void FixedUpdate()
 		{
+			transform.rotation = Quaternion.Slerp(transform.rotation, CurrentAngle, 0.1f);
+			
 			CharacterControl.Move(
 				PlayerVelocity
 			);
