@@ -35,6 +35,7 @@ namespace Spacecraft.Controllers.Player
 		private Vector3 PlayerVelocity;
 		private float JumpHeight = 1.0f;
 		private float LaneChangeSpeed = 3f;
+		private bool ResetOriginFlag = false;
 
 		//angles:
 		private Quaternion TiltAngleRight = Quaternion.Euler(0, 0, -30);
@@ -59,7 +60,7 @@ namespace Spacecraft.Controllers.Player
 		}
 
 
-		private void FixedUpdate()
+		private void Update()
 		{
 			// if (IsPaused)
 			// {
@@ -127,16 +128,25 @@ namespace Spacecraft.Controllers.Player
 			PlayerVelocity.y = 0; //+= GameConsts.GravityValue * Time.deltaTime;
 			PlayerVelocity.z = ForwardSpeed * Time.fixedDeltaTime;
 
-			CharacterControl.Move(
-				PlayerVelocity
-			);
-
 			transform.rotation = Quaternion.Slerp(transform.rotation, CurrentAngle, 0.1f);
 
 			if (transform.position.z > (GameConsts.HowManyUnitsUntilWorldResets + GameConsts.ChunkGenerationOffset)) // this code resets player and the map
 			{
 				Debug.Log("Reset");
+				ResetOriginFlag = true;
+			}
+		}
+
+		private void FixedUpdate()
+		{
+			CharacterControl.Move(
+				PlayerVelocity
+			);
+			
+			if (ResetOriginFlag)
+			{
 				ResetObjectsToOrigin();
+				ResetOriginFlag = false;
 			}
 		}
 
