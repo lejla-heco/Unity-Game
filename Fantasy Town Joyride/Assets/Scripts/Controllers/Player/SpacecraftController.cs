@@ -47,6 +47,8 @@ namespace Spacecraft.Controllers.Player
 
 		private void Start()
 		{
+			Application.targetFrameRate = 20;
+			
 			transform.position = Vector3.zero;
 			CurrentAngle = IdleAngle;
 			ShipAnimator = transform.GetChild(0).gameObject.GetComponent<ShipAnimatorController>();
@@ -123,7 +125,7 @@ namespace Spacecraft.Controllers.Player
 
 
 			x = Mathf.Lerp(x, NewHorizontalValue, LaneChangeSpeed * Time.fixedDeltaTime);
-			PlayerVelocity.x = x - transform.position.x;
+			PlayerVelocity.x = (x - transform.position.x)  * Time.deltaTime;
 
 			PlayerVelocity.y = 0; //+= GameConsts.GravityValue * Time.deltaTime;
 			PlayerVelocity.z = ForwardSpeed * Time.fixedDeltaTime;
