@@ -8,57 +8,57 @@ using UnityEngine.UI;
 
 namespace Spacecraft
 {
-    public class CoinCollector : TrackedEntity
-    {
-        private int Delay;
-        private int Points;
-        private int ThisGamesPoints = 0;
-        [SerializeField] private AudioClip CoinPickUpSound;
-        [SerializeField] private TextMeshProUGUI CollectedCoins;
-        private void Start()
-        {
-            Points = PlayerPrefs.GetInt("CollectedMoney", 0);
-            Delay = 2;
-            CollectedCoins.text = "Coins: " + Points.ToString();
-        }
+	public class CoinCollector : TrackedEntity
+	{
+		private int Delay;
+		private int Points;
+		private int ThisGamesPoints = 0;
+		[SerializeField] private AudioClip CoinPickUpSound;
+		[SerializeField] private TextMeshProUGUI CollectedCoins;
+		private void Start()
+		{
+			Points = 0; //PlayerPrefs.GetInt("CollectedMoney", 0);
+			Delay = 2;
+			CollectedCoins.text = "Coins: " + Points.ToString();
+		}
 
-        private void Update()
-        {
-            if (IsPaused) PlayerPrefs.SetInt("CollectedMoney", Points + ThisGamesPoints);
-        }
+		private void Update()
+		{
+			if (IsPaused) PlayerPrefs.SetInt("CollectedMoney", Points + ThisGamesPoints);
+		}
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.CompareTag("BigGem"))
-            {
-                PlayCoinPickUpSound(other);
-                other.gameObject.SetActive(false);
-                ThisGamesPoints += 2;
-                Reactivate(other);
-                
-            }
+		private void OnTriggerEnter(Collider other)
+		{
+			if (other.gameObject.CompareTag("BigGem"))
+			{
+				PlayCoinPickUpSound(other);
+				other.gameObject.SetActive(false);
+				ThisGamesPoints += 2;
+				Reactivate(other);
 
-            if (other.gameObject.CompareTag("SmallGem"))
-            {
-                PlayCoinPickUpSound(other);
-                other.gameObject.SetActive(false);
-                ThisGamesPoints += 1;
-                Reactivate(other);
-            }
+			}
 
-            int Result = Points + ThisGamesPoints;
-            CollectedCoins.text = "Coins: " + Result.ToString();
-        }
+			if (other.gameObject.CompareTag("SmallGem"))
+			{
+				PlayCoinPickUpSound(other);
+				other.gameObject.SetActive(false);
+				ThisGamesPoints += 1;
+				Reactivate(other);
+			}
 
-        IEnumerator Reactivate(Collider other)
-        {
-            yield return new WaitForSeconds(Delay);
-            other.gameObject.SetActive(true);
-        }
+			int Result = Points + ThisGamesPoints;
+			CollectedCoins.text = "Coins: " + Result.ToString();
+		}
 
-        private void PlayCoinPickUpSound(Collider other)
-        {
-            AudioSource.PlayClipAtPoint(CoinPickUpSound, other.gameObject.transform.position);
-        }
-    }
+		IEnumerator Reactivate(Collider other)
+		{
+			yield return new WaitForSeconds(Delay);
+			other.gameObject.SetActive(true);
+		}
+
+		private void PlayCoinPickUpSound(Collider other)
+		{
+			AudioSource.PlayClipAtPoint(CoinPickUpSound, other.gameObject.transform.position);
+		}
+	}
 }

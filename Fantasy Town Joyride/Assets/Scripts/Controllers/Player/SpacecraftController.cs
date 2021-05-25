@@ -50,7 +50,7 @@ namespace Spacecraft.Controllers.Player
 			CurrentAngle = IdleAngle;
 			ShipAnimator = transform.GetChild(0).gameObject.GetComponent<ShipAnimatorController>();
 			CharacterControl = GetComponent<CharacterController>();
-			InputManager.OnInputChanged += OnInputChanged;
+			// InputManager.OnInputChanged += OnInputChanged;
 
 			if (Level == null) // we will use this wrapper to control Z axis of player and map
 			{
@@ -59,7 +59,7 @@ namespace Spacecraft.Controllers.Player
 		}
 
 
-		private void OnInputChanged()
+		private void FixedUpdate()
 		{
 			// if (IsPaused)
 			// {
@@ -121,11 +121,11 @@ namespace Spacecraft.Controllers.Player
 			}
 
 
-			x = Mathf.Lerp(x, NewHorizontalValue, LaneChangeSpeed * Time.deltaTime);
+			x = Mathf.Lerp(x, NewHorizontalValue, LaneChangeSpeed * Time.fixedDeltaTime);
 			PlayerVelocity.x = x - transform.position.x;
 
 			PlayerVelocity.y = 0; //+= GameConsts.GravityValue * Time.deltaTime;
-			PlayerVelocity.z = ForwardSpeed * Time.deltaTime;
+			PlayerVelocity.z = ForwardSpeed * Time.fixedDeltaTime;
 
 			CharacterControl.Move(
 				PlayerVelocity
