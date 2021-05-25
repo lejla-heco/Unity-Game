@@ -1,18 +1,19 @@
 using System.Collections.Generic;
 using Spacecraft.Consts;
+using Spacecraft.Core.LevelGenerator;
 using Spacecraft.ScriptableObjects;
+using Spacecraft.ScriptableObjects.Obstacles;
 using UnityEngine;
 
-namespace Spacecraft.Controllers.Core.LevelGenerator
+namespace Spacecraft.Core.LevelGenerator
 {
 	public class LevelGenerator : MonoBehaviour
 	{
 		[SerializeField]
 		private Transform ChunksParent;
+
 		[SerializeField]
-		private ObstacleCollection Obstacles;
-		[SerializeField]
-		private GameObject DefaultLevelChunk;
+		private GameAssetsCollection AssetsCollection;
 
 		private ObjectPool<GameObject> LevelPool { get; set; }
 
@@ -38,8 +39,8 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 			for (int i = 0; i < 8; i++) // how many level segments we want
 			{
 				// take an empty chunk and generate obstacles on it
-				LevelPool.Add(GenerateObstaclesOnChunk(
-					Instantiate(DefaultLevelChunk, Vector3.zero, Quaternion.identity, ChunksParent
+				LevelPool.Add(GenerateChunkWithObjects(
+					Instantiate(AssetsCollection.DefaultLevelChunk, Vector3.zero, Quaternion.identity, ChunksParent
 					)));
 			}
 
@@ -65,20 +66,102 @@ namespace Spacecraft.Controllers.Core.LevelGenerator
 		}
 
 
-		private GameObject GenerateObstaclesOnChunk(GameObject chunk)
+		private GameObject GenerateChunkWithObjects(GameObject chunk, int Level = 1)
 		{
-			for (int j = 0; j < 6; j++) // sada je 6 zbog toga sto je razmak 15 izmedju svake -> 6 * 15 = 90 a duzina chunk-a je 100
+			int ObstaclesPerLevelBase = 4;
+			int CoinsPerLevelBase = 2;
+
+			// chunk 2d array
+			int[,] ChunkDataArray =
 			{
-				var NextIndex = GameConsts.Rnd.Next(Obstacles.Items.Count);
+				{
+					0, 0, 0
+				},
+				{
+					0, 0, 0
+				},
+				{
+					0, 0, 0
+				},
+				{
+					0, 0, 0
+				},
+				{
+					0, 0, 0
+				},
+				{
+					0, 0, 0
+				},
+				{
+					0, 0, 0
+				},
+				{
+					0, 0, 0
+				},
+				{
+					0, 0, 0
+				},
+				{
+					0, 0, 0
+				}
+			};
+
+			// generate coins
+			var GeneratedCoins = 0;
+			while (GeneratedCoins < CoinsPerLevelBase * Level)
+			{
 				var NextLane = GameConsts.Rnd.Next(Lanes.Length);
-				var Obstacle = Obstacles.Items[NextIndex];
+				var NextRow = GameConsts.Rnd.Next(10);
+
+				// check if this position is free
+				if (ChunkDataArray[NextRow, NextLane] != 0)
+				{
+					continue;
+				}
+				ChunkDataArray[NextRow, NextLane] = 2;
+				GeneratedCoins++;
+				Instantiate(
+					AssetsCollection.Gems[0].GetObject(),
+					new Vector3(Lanes[NextLane], 1.5f, NextRow * 10 - 50),
+					Quaternion.identity,
+					chunk.transform
+				);
+			}
+
+			// generate obstacles
+			var GeneratedObstacles = 0;
+			while (GeneratedObstacles < ObstaclesPerLevelBase * Level)
+			{
+				var RandomObstacle = AssetsCollection.GetRandomObstacle(Level);
+
+				var NextLane = GameConsts.Rnd.Next(Lanes.Length);
+				var NextRow = GameConsts.Rnd.Next(10);
+
+				// check if this position is free
+				if (ChunkDataArray[NextRow, NextLane] != 0)
+				{
+					continue;
+				}
+
+				var Prev = (NextLane - 1) < 0 ? 2 : NextLane - 1;
+				var Next = (NextLane + 1) > 2 ? 0 : NextLane + 1;
+				// check if this position will block all paths
+				if (ChunkDataArray[NextRow, Prev] != 0 && ChunkDataArray[NextRow, Next] != 0)
+				{
+					continue;
+				}
+
+				ChunkDataArray[NextRow, NextLane] = 1;
+				GeneratedObstacles++;
 
 				Instantiate(
-					Obstacle.GetObject(),
-					new Vector3(Lanes[NextLane], 0, 15 * j - 50),
-					Obstacle.GetRotation(),
-					chunk.transform);
+					RandomObstacle.GetObject(),
+					new Vector3(Lanes[NextLane], 0, NextRow * 10 - 50),
+					RandomObstacle.GetRotation(),
+					chunk.transform
+				);
 			}
+
 
 			chunk.SetActive(false);
 			return chunk;

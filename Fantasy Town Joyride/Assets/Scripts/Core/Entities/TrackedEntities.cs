@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-namespace Spacecraft.Controllers.Core.Entities
+namespace Spacecraft.Core.Entities
 
 {
 

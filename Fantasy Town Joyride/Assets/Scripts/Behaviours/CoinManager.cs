@@ -1,6 +1,6 @@
 using System.Collections;
-using Spacecraft.Controllers.Core.Entities;
-using Spacecraft.Controllers.Core.LevelGenerator;
+using Spacecraft.Core.Entities;
+using Spacecraft.Core.LevelGenerator;
 using UnityEngine;
 
 namespace Spacecraft

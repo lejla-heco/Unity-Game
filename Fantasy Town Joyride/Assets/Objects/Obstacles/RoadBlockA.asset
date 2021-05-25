@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24aecb94853643b9859ca9892e0e189c, type: 3}
-  m_Name: GasTankA
+  m_Name: RoadBlockA
   m_EditorClassIdentifier: 
-  Data: {fileID: 3161220981922230988, guid: af69890438fb10145b34f1022115329e, type: 3}
-  Rotation: {x: 0, y: 0, z: 0}
-  Tag: GasTank
+  Data: {fileID: 3789331185751815884, guid: 523f5d64a11a545479f05ea0c7d483e0, type: 3}
+  Rotation: {x: -90, y: 90, z: 0}
+  MinLevelForObstacleToAppear: 0

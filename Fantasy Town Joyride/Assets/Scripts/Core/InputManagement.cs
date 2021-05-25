@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Spacecraft.Controllers.Core
+namespace Spacecraft.Core
 {
     public class InputManagement : MonoBehaviour
     {

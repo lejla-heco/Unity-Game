@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Spacecraft.Consts;
-using Spacecraft.Controllers.Core;
-using Spacecraft.Controllers.Core.Entities;
-using Spacecraft.Controllers.Core.LevelGenerator;
+using Spacecraft.Core;
+using Spacecraft.Core.Entities;
+using Spacecraft.Core.LevelGenerator;
 using UnityEngine;
+
 namespace Spacecraft.Controllers.Player
 {
 	[System.Serializable]

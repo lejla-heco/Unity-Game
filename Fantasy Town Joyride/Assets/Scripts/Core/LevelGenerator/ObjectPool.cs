@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace Spacecraft.Controllers.Core.LevelGenerator
+namespace Spacecraft.Core.LevelGenerator
 {
 	public class ObjectPool<T>
 	{

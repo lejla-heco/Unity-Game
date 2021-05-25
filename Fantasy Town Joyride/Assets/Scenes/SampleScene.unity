@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InputManager: {fileID: 926544532}
-  ForwardSpeed: 15
+  ForwardSpeed: 22.8
   CurrentPosition: 1
   SlideSound: {fileID: 8300000, guid: 0a8141d8696493f47830b65cb965b1c6, type: 3}
   SlideLength: 3
@@ -316,9 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf063a6f43dca734d875c3904ab4368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GeneratorData: {fileID: 11400000, guid: 7a32b98687b5c3c4bb5e6ca6a3763bb1, type: 2}
   ChunksParent: {fileID: 496819962}
-  Obstacles: {fileID: 11400000, guid: 8859dc624d76b4a34b5c7148d76bcdf2, type: 2}
+  AssetsCollection: {fileID: 11400000, guid: b89e7b166ba57410fbc30e90c0faf611, type: 2}
   DefaultLevelChunk: {fileID: 6658467306721053266, guid: 8e8e144d34f074d32b5a35128772f638,
     type: 3}
 --- !u!1 &400845969

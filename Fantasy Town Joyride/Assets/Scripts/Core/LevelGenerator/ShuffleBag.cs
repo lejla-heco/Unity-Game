@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Spacecraft.Controllers.Core.LevelGenerator
+namespace Spacecraft.Core.LevelGenerator
 {
     public class ShuffleBag<T>
     {

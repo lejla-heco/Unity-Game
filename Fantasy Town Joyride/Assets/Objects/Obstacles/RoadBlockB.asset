@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24aecb94853643b9859ca9892e0e189c, type: 3}
-  m_Name: RoadBlockA
+  m_Name: RoadBlockB
   m_EditorClassIdentifier: 
-  Data: {fileID: 3789331185751815884, guid: 523f5d64a11a545479f05ea0c7d483e0, type: 3}
-  Rotation: {x: -90, y: 90, z: 0}
-  Tag: RoadBlock
+  Data: {fileID: 3372253157872977756, guid: 183e90fe7ccd08f4bb22582b5c91ed61, type: 3}
+  Rotation: {x: -90, y: 0, z: 90}
+  MinLevelForObstacleToAppear: 2

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Spacecraft.Controllers.Core.LevelGenerator
+namespace Spacecraft.Core.LevelGenerator
 {
 	public class TriggerExit : MonoBehaviour
 	{

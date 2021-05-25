@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23ad4aff43414036a9de21f0b324ad7d, type: 3}
+  m_Name: SmallGem
+  m_EditorClassIdentifier: 
+  Object: {fileID: 6068350287108907678, guid: daf1fe25681d4f54693249c895946924, type: 3}
+  Points: 0

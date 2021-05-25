@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24aecb94853643b9859ca9892e0e189c, type: 3}
-  m_Name: RoadBlockB
+  m_Script: {fileID: 11500000, guid: 23ad4aff43414036a9de21f0b324ad7d, type: 3}
+  m_Name: BigGem
   m_EditorClassIdentifier: 
-  Data: {fileID: 3372253157872977756, guid: 183e90fe7ccd08f4bb22582b5c91ed61, type: 3}
-  Rotation: {x: -90, y: 0, z: 90}
-  Tag: RoadBlock
+  Object: {fileID: 8871589328933439244, guid: 75ab9caa5661a8c4ca1c7055a6f276d3, type: 3}
+  Points: 0

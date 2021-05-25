@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Spacecraft.Controllers.Core.Entities;
+using Spacecraft.Core.Entities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

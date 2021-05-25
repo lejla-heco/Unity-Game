@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24aecb94853643b9859ca9892e0e189c, type: 3}
   m_Name: GasTankB
   m_EditorClassIdentifier: 
-  Data: {fileID: 8171867188998482085, guid: f30040377c013324fa511eefea6d434a, type: 3}
+  Data: {fileID: 5050558426348767926, guid: 463bb9808e96d6d428085be5f3396796, type: 3}
   Rotation: {x: 0, y: 0, z: 0}
-  Tag: GasTank
+  MinLevelForObstacleToAppear: 2

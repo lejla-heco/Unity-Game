@@ -1,7 +1,7 @@
 using System.Collections;
-using Spacecraft.Controllers.Core.LevelGenerator;
+using Spacecraft.Core.LevelGenerator;
 using System.Collections.Generic;
-using Spacecraft.Controllers.Core.Entities;
+using Spacecraft.Core.Entities;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
