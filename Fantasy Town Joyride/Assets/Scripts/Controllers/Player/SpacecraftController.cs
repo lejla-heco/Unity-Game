@@ -22,20 +22,21 @@ namespace Spacecraft.Controllers.Player
 
 		[SerializeField] private InputManagement InputManager;
 		[SerializeField] [Range(0.1f, 100f)] private float ForwardSpeed;
+		[SerializeField] [Range(0.1f, 100f)] private float LaneChangeSpeed = 6f;
 		[SerializeField] private LANE CurrentPosition = LANE.Middle;
+		[SerializeField] private LANE PreviousPosition = LANE.Middle;
 		[SerializeField] private AudioClip SlideSound;
 		[SerializeField] private float SlideLength;
 		[SerializeField] private LevelGenerator LevelGenerator;
 		private ShipAnimatorController ShipAnimator { get; set; }
 
-		private float x;
 		private GameObject Level;
 		private float NewHorizontalValue;
 		private const int DefaultShipYPosition = 1;
 		private Vector3 PlayerVelocity;
 		private float JumpHeight = 1.0f;
-		private float LaneChangeSpeed = 3f;
 		private bool ResetOriginFlag = false;
+		private bool IsPlayerMoving = false;
 
 		//angles:
 		private Quaternion TiltAngleRight = Quaternion.Euler(0, 0, -30);
@@ -47,13 +48,12 @@ namespace Spacecraft.Controllers.Player
 
 		private void Start()
 		{
-			Application.targetFrameRate = 20;
-			
+			// Application.targetFrameRate = 60;
+
 			transform.position = Vector3.zero;
 			CurrentAngle = IdleAngle;
 			ShipAnimator = transform.GetChild(0).gameObject.GetComponent<ShipAnimatorController>();
 			CharacterControl = GetComponent<CharacterController>();
-			// InputManager.OnInputChanged += OnInputChanged;
 
 			if (Level == null) // we will use this wrapper to control Z axis of player and map
 			{
@@ -80,6 +80,7 @@ namespace Spacecraft.Controllers.Player
 				{
 					case LANE.Middle:
 						NewHorizontalValue = SlideLength * (IsMovingLeft ? -1 : 1);
+						PreviousPosition = CurrentPosition;
 						CurrentPosition = NewHorizontalValue < 0 ? LANE.Left : LANE.Right;
 						CurrentAngle = IsMovingLeft ? TiltAngleLeft : TiltAngleRight;
 						break;
@@ -87,6 +88,7 @@ namespace Spacecraft.Controllers.Player
 						CurrentAngle = IdleAngle;
 						if (!IsMovingLeft) break;
 						NewHorizontalValue = 0;
+						PreviousPosition = CurrentPosition;
 						CurrentPosition = LANE.Middle;
 						CurrentAngle = TiltAngleLeft;
 						break;
@@ -94,6 +96,7 @@ namespace Spacecraft.Controllers.Player
 						CurrentAngle = IdleAngle;
 						if (IsMovingLeft) break;
 						NewHorizontalValue = 0;
+						PreviousPosition = CurrentPosition;
 						CurrentPosition = LANE.Middle;
 						CurrentAngle = TiltAngleRight;
 						break;
@@ -103,16 +106,11 @@ namespace Spacecraft.Controllers.Player
 			}
 
 			var IsGrounded = DefaultShipYPosition == (int)Math.Round(transform.position.y);
-			if (IsGrounded && PlayerVelocity.y < 0) // check if player is grounded and jump value goes below 0 and set it to 0
-			{
-				PlayerVelocity.y = 0f;
-			}
 
 			if (Input.GetButtonDown("Vertical"))
 			{
 				if (Input.GetAxis("Vertical") > 0 && IsGrounded)
 				{
-					PlayerVelocity.y += Mathf.Sqrt(JumpHeight * -1.0f * GameConsts.GravityValue);
 					ShipAnimator.TriggerMoveUp();
 				}
 				else
@@ -123,13 +121,17 @@ namespace Spacecraft.Controllers.Player
 				PlaySlideSound();
 			}
 
+			var Course = WhichWay(PreviousPosition, CurrentPosition);
+			if (transform.position.x * Course < Math.Abs(NewHorizontalValue))
+			{
+				PlayerVelocity.x = LaneChangeSpeed * Course;
+			}
+			else
+			{
+				PlayerVelocity.x = 0;
+			}
 
-			x = Mathf.Lerp(x, NewHorizontalValue, LaneChangeSpeed * Time.fixedDeltaTime);
-			PlayerVelocity.x = (x - transform.position.x)  * Time.deltaTime;
-
-			PlayerVelocity.y = 0; //+= GameConsts.GravityValue * Time.deltaTime;
-			PlayerVelocity.z = ForwardSpeed * Time.fixedDeltaTime;
-			
+			PlayerVelocity.z = ForwardSpeed;
 
 			if (transform.position.z > (GameConsts.HowManyUnitsUntilWorldResets + GameConsts.ChunkGenerationOffset)) // this code resets player and the map
 			{
@@ -140,16 +142,31 @@ namespace Spacecraft.Controllers.Player
 		private void FixedUpdate()
 		{
 			transform.rotation = Quaternion.Slerp(transform.rotation, CurrentAngle, 0.1f);
-			
+
 			CharacterControl.Move(
-				PlayerVelocity
+				PlayerVelocity * Time.fixedDeltaTime
 			);
-			
+
 			if (ResetOriginFlag)
 			{
 				ResetObjectsToOrigin();
 				ResetOriginFlag = false;
 			}
+		}
+
+		private int WhichWay(LANE Previous, LANE Current)
+		{
+			if ((Previous == LANE.Middle && Current == LANE.Right) || Previous == LANE.Left)
+			{
+				return 1;
+			}
+
+			if ((Previous == LANE.Middle && Current == LANE.Left) || Previous == LANE.Right)
+			{
+				return -1;
+			}
+
+			return 0;
 		}
 
 		private void PlaySlideSound()
