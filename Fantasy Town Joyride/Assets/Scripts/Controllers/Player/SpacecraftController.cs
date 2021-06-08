@@ -64,11 +64,10 @@ namespace Spacecraft.Controllers.Player
 
 		private void Update()
 		{
-			// if (IsPaused)
-			// {
-			// 	Debug.Log("Umro je");
-			// 	return;
-			// }
+			 if (IsPaused)
+			 {
+				 return;
+			 }
 
 			if (Input.GetButtonUp("Horizontal")) CurrentAngle = IdleAngle;
 
@@ -141,6 +140,10 @@ namespace Spacecraft.Controllers.Player
 
 		private void FixedUpdate()
 		{
+			if (IsPaused)
+			{
+				return;
+			}
 			transform.rotation = Quaternion.Slerp(transform.rotation, CurrentAngle, 0.1f);
 
 			CharacterControl.Move(

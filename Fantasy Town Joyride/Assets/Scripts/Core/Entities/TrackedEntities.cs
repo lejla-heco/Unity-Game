@@ -13,7 +13,7 @@ namespace Spacecraft.Core.Entities
     {
 
         public static bool IsPaused = false;
-
+        public static bool IsProtected = false;
     }
 
 }
