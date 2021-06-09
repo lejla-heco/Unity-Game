@@ -64,7 +64,7 @@ namespace Spacecraft.Controllers.Player
 
 		private void Update()
 		{
-			 if (IsPaused)
+			if (IsPaused)
 			 {
 				 return;
 			 }

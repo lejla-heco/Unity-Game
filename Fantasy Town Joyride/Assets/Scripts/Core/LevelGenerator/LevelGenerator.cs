@@ -15,6 +15,7 @@ namespace Spacecraft.Core.LevelGenerator
 		[SerializeField]
 		private GameAssetsCollection AssetsCollection;
 
+		private int[] GeneratePowerUp = new int [] { 0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0};
 		private ObjectPool<GameObject> LevelPool { get; set; }
 
 		private int ActiveChunkCount = 0;
@@ -160,6 +161,24 @@ namespace Spacecraft.Core.LevelGenerator
 					RandomObstacle.GetRotation(),
 					chunk.transform
 				);
+			}
+			
+			//generate power up
+			if (GeneratePowerUp[GameConsts.Rnd.Next(GeneratePowerUp.Length)] == 1)
+			{
+				var NextLane = GameConsts.Rnd.Next(Lanes.Length);
+				var NextRow = GameConsts.Rnd.Next(10);
+				
+				if (ChunkDataArray[NextRow, NextLane] == 0)
+				{
+					ChunkDataArray[NextRow, NextLane] = 3;
+					Instantiate(
+						AssetsCollection.PickUp,
+						new Vector3(Lanes[NextLane], 0.5f, NextRow * 10 - 50),
+						Quaternion.identity,
+						chunk.transform
+					);
+				}
 			}
 
 

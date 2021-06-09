@@ -18,6 +18,7 @@ TagManager:
   - ExitTrigger
   - SpacecraftObject
   - RoadBlock
+  - PowerUp
   layers:
   - Default
   - TransparentFX

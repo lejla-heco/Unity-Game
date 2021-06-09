@@ -15,12 +15,14 @@ namespace Spacecraft
 	{
 		private int Lives = 3;
 		[SerializeField] private GameObject CollisionEffect;
-		[SerializeField] private GameObject ExplosionEffect;
-
+		[SerializeField] private GameObject DeathEffect;
+		[SerializeField] private GameObject ProtectedEffect;
+		private GameObject PickUpEffect;
+		private float Delay;
 		[SerializeField] private RawImage FirstLife;
 		[SerializeField] private RawImage SecondLife;
 		[SerializeField] private RawImage ThirdLife;
-
+	
 		private Renderer Renderer;
 		private Color[] RegularColors;
 		[SerializeField] private Material Mat1;
@@ -36,25 +38,43 @@ namespace Spacecraft
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.gameObject.CompareTag("Barrel") || other.gameObject.CompareTag("Hidrant") ||
-			    other.gameObject.CompareTag("Tree") || other.gameObject.CompareTag("StreetSign") || other.gameObject.CompareTag("RoadBlock"))
+			if (other.gameObject.CompareTag("PowerUp"))
 			{
-				LoseLife();
+				IsProtected = true;
+				Delay = 10.0f;
+				other.gameObject.SetActive(false);
+				ActivateEffect(ProtectedEffect);
+				StartCoroutine(ReactivatePowerUp(other.gameObject));
 			}
-			else if (other.gameObject.CompareTag("GasTank"))
+			if (!IsProtected)
 			{
-				FirstLife.color = Color.black;
-				SecondLife.color = Color.black;
-				ThirdLife.color = Color.black;
-				Die();
+				if (other.gameObject.CompareTag("Barrel") || other.gameObject.CompareTag("Hidrant") ||
+				    other.gameObject.CompareTag("Tree") || other.gameObject.CompareTag("StreetSign") ||
+				    other.gameObject.CompareTag("RoadBlock"))
+				{
+					LoseLife();
+				}
+				else if (other.gameObject.CompareTag("GasTank"))
+				{
+					FirstLife.color = Color.black;
+					SecondLife.color = Color.black;
+					ThirdLife.color = Color.black;
+					Die();
+				}
 			}
+		}
+
+		IEnumerator ReactivatePowerUp(GameObject other)
+		{
+			yield return new WaitForSeconds(1.0f);
+			other.SetActive(true);
 		}
 
 
 		public void LoseLife()
 		{
 			if (IsProtected) return;
-			
+			Delay = 0.5f;
 			Lives--;
 			if (Lives == 2)
 			{
@@ -77,7 +97,8 @@ namespace Spacecraft
 		private void Die()
 		{
 			if (IsProtected) return;
-			ActivateEffect(ExplosionEffect);
+			Delay = 5.0f;
+			ActivateEffect(DeathEffect);
 			IsPaused = true;
 		}
 
@@ -89,8 +110,9 @@ namespace Spacecraft
 
 		IEnumerator Deactivate(GameObject effect)
 		{
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(Delay);
 			effect.SetActive(false);
+			if (IsProtected) IsProtected = false;
 		}
 		
 		IEnumerator Flasher() 

@@ -14,6 +14,8 @@ namespace Spacecraft.ScriptableObjects
 		[SerializeField]
 		public GameObject DefaultLevelChunk;
 
+		[SerializeField] public GameObject PickUp;
+
 		[SerializeField]
 		public List<Obstacle> Items;
 
