@@ -19,6 +19,7 @@ TagManager:
   - SpacecraftObject
   - RoadBlock
   - PowerUp
+  - SceneManagement
   layers:
   - Default
   - TransparentFX
