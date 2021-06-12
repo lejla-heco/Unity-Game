@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: ca01636b30eb34e55ab96e8ac6721f5e,
+    type: 2}
   m_LightingSettings: {fileID: 700203555}
 --- !u!196 &4
 NavMeshSettings:
@@ -172,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eedd4634f8b933a4eb374cb2a4f09bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Lives: 3
   ForwardSpeed: 22.8
   LaneChangeSpeed: 6
   CurrentPosition: 1
@@ -377,9 +379,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1983876309}
-        m_TargetAssemblyTypeName: Spacecraft.PauseMenu, Assembly-CSharp
-        m_MethodName: Resume
+      - m_Target: {fileID: 1983876310}
+        m_TargetAssemblyTypeName: Spacecraft.UI.GameOverMenu, Assembly-CSharp
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -708,7 +710,7 @@ GameObject:
   - component: {fileID: 259933063}
   m_Layer: 5
   m_Name: GameOverMenu
-  m_TagString: Untagged
+  m_TagString: GameOverMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -801,7 +803,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &284645143
 MonoBehaviour:
@@ -815,8 +817,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf063a6f43dca734d875c3904ab4368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChunksParent: {fileID: 496819962}
+  ChunksParent: {fileID: 0}
   AssetsCollection: {fileID: 11400000, guid: b89e7b166ba57410fbc30e90c0faf611, type: 2}
+  LevelWrapper: {fileID: 548209609}
 --- !u!1 &325388313
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,7 +983,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &496819961
+--- !u!1 &548209609
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -988,23 +991,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 496819962}
+  - component: {fileID: 548209610}
   m_Layer: 0
   m_Name: Level
-  m_TagString: Untagged
+  m_TagString: LevelWrapper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!4 &496819962
+--- !u!4 &548209610
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 496819961}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10.255, z: 0.40499878}
+  m_GameObject: {fileID: 548209609}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1455,49 +1458,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746147890}
   m_CullTransparentMesh: 1
---- !u!1 &926544531
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 926544533}
-  - component: {fileID: 926544532}
-  m_Layer: 0
-  m_Name: SceneManagement
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &926544532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926544531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ac7311bbdf5e0e41b6f0ccd2e577fd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &926544533
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926544531}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1671,7 +1631,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1189411918
 PrefabInstance:
@@ -2029,9 +1989,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1983876309}
-        m_TargetAssemblyTypeName: Spacecraft.PauseMenu, Assembly-CSharp
-        m_MethodName: ExitToMainMenu
+      - m_Target: {fileID: 1983876310}
+        m_TargetAssemblyTypeName: Spacecraft.UI.GameOverMenu, Assembly-CSharp
+        m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2230,6 +2190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc0fbc89f6cfc4429bbcbb894ec6a4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Lives: 3
   CoinPickUpSound: {fileID: 8300000, guid: 08e1cf5d46d3d034eb930ce0f8e7850b, type: 3}
   CollectedCoins: {fileID: 668796868}
 --- !u!65 &1522416496
@@ -2288,7 +2249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff872f83fc8004741a66029ce1c7a8d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameOverMenu: {fileID: 0}
+  Lives: 3
   CollisionEffect: {fileID: 2142255526}
   DeathEffect: {fileID: 1553283103}
   ProtectedEffect: {fileID: 554583990}
@@ -2296,7 +2257,7 @@ MonoBehaviour:
   SecondLife: {fileID: 549884274}
   ThirdLife: {fileID: 1783909628}
   Mat1: {fileID: 2100000, guid: 8b4c1b1337d3f804d9db6b7f11e5148c, type: 2}
-  SceneManagement: {fileID: 0}
+  GameOverMenu: {fileID: 259933061}
 --- !u!1 &1553283103 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4397334591890123670, guid: b0159ffb3464ec5478e3f6e6ce51d561,
@@ -2434,7 +2395,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1669588108
 PrefabInstance:
@@ -2562,7 +2523,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1743926323
 PrefabInstance:
@@ -2946,6 +2907,7 @@ GameObject:
   - component: {fileID: 1983876306}
   - component: {fileID: 1983876305}
   - component: {fileID: 1983876309}
+  - component: {fileID: 1983876310}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3032,7 +2994,7 @@ RectTransform:
   - {fileID: 1790934342}
   - {fileID: 259933062}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3052,6 +3014,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenuUI: {fileID: 1790934341}
+--- !u!114 &1983876310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983876304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a70313497a0459fa913fe913e7820cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Lives: 3
 --- !u!1 &2132033204
 GameObject:
   m_ObjectHideFlags: 0

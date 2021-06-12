@@ -42,9 +42,9 @@ namespace Spacecraft.Controllers.Player
         [SerializeField] private Quaternion CurrentAngle;
         private CharacterController CharacterControl;
 
-        private void Start()
+        private void Awake()
         {
-            // Application.targetFrameRate = 60;
+            //           Application.targetFrameRate = 20;
 
             transform.position = Vector3.zero;
             CurrentAngle = IdleAngle;
@@ -53,7 +53,7 @@ namespace Spacecraft.Controllers.Player
 
             if (Level == null) // we will use this wrapper to control Z axis of player and map
             {
-                Level = GameObject.Find("Level");
+                Level = GameObject.FindGameObjectWithTag("LevelWrapper");
             }
         }
 
@@ -100,10 +100,11 @@ namespace Spacecraft.Controllers.Player
                 PlaySlideSound();
             }
 
-            var IsGrounded = DefaultShipYPosition == (int) Math.Round(transform.position.y);
 
             if (Input.GetButtonDown("Vertical"))
             {
+                var IsGrounded = DefaultShipYPosition == (int) Math.Round(transform.position.y);
+
                 if (Input.GetAxis("Vertical") > 0 && IsGrounded)
                 {
                     ShipAnimator.TriggerMoveUp();
@@ -193,7 +194,6 @@ namespace Spacecraft.Controllers.Player
             }
 
             // return player to 0
-            // TODO ovdje zapne malo igrac zbog vremenske razlike kada se vrate chunkovi mape i kada se vrati igrac
             var Position = transform.position;
             transform.position = new Vector3(Position.x, Position.y, 0 + GameConsts.ChunkGenerationOffset);
             LevelGenerator.ResetChunkNumbers(GameConsts.InitialChunksNumber); // reset chunk numbers for calc

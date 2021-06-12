@@ -14,8 +14,8 @@ namespace Spacecraft.Behaviours.Colliders
         [SerializeField] private RawImage SecondLife;
         [SerializeField] private RawImage ThirdLife;
         [SerializeField] private Material Mat1;
+        [SerializeField] private GameObject GameOverMenu;
 
-        private GameObject PickUpEffect;
         private Renderer Renderer;
         private Color[] RegularColors;
 
@@ -84,6 +84,8 @@ namespace Spacecraft.Behaviours.Colliders
             {
                 ThirdLife.color = Color.black;
                 ActivateEffect(DeathEffect, 5f);
+
+                GameOverMenu.SetActive(true);
             }
         }
 

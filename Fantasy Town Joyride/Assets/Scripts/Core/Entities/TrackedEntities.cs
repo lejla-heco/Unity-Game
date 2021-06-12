@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -9,8 +10,15 @@ namespace Spacecraft.Core.Entities
         public static bool IsProtected = false;
         public static bool IsGameOver = false;
         public static int Points;
-
         public int Lives = 3;
+
+        public void InitializeGameStats()
+        {
+            Points = 0;
+            IsGameOver = false;
+            IsProtected = false;
+            Lives = 3;
+        }
 
         public int LoseLife(int howManyLives = 1)
         {
