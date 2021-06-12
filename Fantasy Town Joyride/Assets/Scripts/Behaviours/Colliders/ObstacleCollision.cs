@@ -1,16 +1,9 @@
-using System;
 using System.Collections;
-using Spacecraft.Core.LevelGenerator;
-using System.Collections.Generic;
-using Spacecraft.Core;
 using Spacecraft.Core.Entities;
-using UnityEditor.AssetImporters;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
-namespace Spacecraft
+namespace Spacecraft.Behaviours.Colliders
 {
     public class ObstacleCollision : TrackedEntity
     {
@@ -20,13 +13,11 @@ namespace Spacecraft
         [SerializeField] private RawImage FirstLife;
         [SerializeField] private RawImage SecondLife;
         [SerializeField] private RawImage ThirdLife;
+        [SerializeField] private Material Mat1;
 
         private GameObject PickUpEffect;
-        private float Delay;
-
         private Renderer Renderer;
         private Color[] RegularColors;
-        [SerializeField] private Material Mat1;
 
 
         private void Start()
@@ -43,9 +34,8 @@ namespace Spacecraft
             if (other.gameObject.CompareTag("PowerUp"))
             {
                 IsProtected = true;
-                Delay = 10.0f;
                 other.gameObject.SetActive(false);
-                ActivateEffect(ProtectedEffect);
+                ActivateEffect(ProtectedEffect, 10f);
                 StartCoroutine(ReactivatePowerUp(other.gameObject));
             }
 
@@ -55,14 +45,14 @@ namespace Spacecraft
                     other.gameObject.CompareTag("Tree") || other.gameObject.CompareTag("StreetSign") ||
                     other.gameObject.CompareTag("RoadBlock"))
                 {
-                    LoseLife();
+                    HitObstacle();
                 }
                 else if (other.gameObject.CompareTag("GasTank"))
                 {
                     FirstLife.color = Color.black;
                     SecondLife.color = Color.black;
                     ThirdLife.color = Color.black;
-                    Die();
+                    HitObstacle(3);
                 }
             }
         }
@@ -73,53 +63,44 @@ namespace Spacecraft
             other.SetActive(true);
         }
 
-
-        public void LoseLife()
+        private void HitObstacle(int severity = 1)
         {
             if (IsProtected) return;
-            Delay = 0.5f;
-            LoseLife();
-            if (Lives == 2)
+
+            var LivesLeft = LoseLife(severity);
+            if (LivesLeft == 2)
             {
                 FirstLife.color = Color.black;
-                ActivateEffect(CollisionEffect);
+                ActivateEffect(CollisionEffect, 0.5f);
                 StartCoroutine(Flasher());
             }
-            else if (Lives == 1)
+            else if (LivesLeft == 1)
             {
                 SecondLife.color = Color.black;
-                ActivateEffect(CollisionEffect);
+                ActivateEffect(CollisionEffect, 0.5f);
                 StartCoroutine(Flasher());
             }
-            else if (Lives == 0)
+            else if (LivesLeft <= 0)
             {
                 ThirdLife.color = Color.black;
-                Die();
+                ActivateEffect(DeathEffect, 5f);
             }
         }
 
-        private void Die()
-        {
-            if (IsProtected) return;
-            Delay = 5.0f;
-            ActivateEffect(DeathEffect);
-            Die();
-        }
-
-        private void ActivateEffect(GameObject effect)
+        private void ActivateEffect(GameObject effect, float delay)
         {
             effect.SetActive(true);
-            StartCoroutine(Deactivate(effect));
+            StartCoroutine(Deactivate(effect, delay));
         }
 
-        IEnumerator Deactivate(GameObject effect)
+        private IEnumerator Deactivate(GameObject effect, float delay)
         {
-            yield return new WaitForSeconds(Delay);
+            yield return new WaitForSeconds(delay);
             effect.SetActive(false);
             if (IsProtected) IsProtected = false;
         }
 
-        IEnumerator Flasher()
+        private IEnumerator Flasher()
         {
             for (int i = 0; i < 5; i++)
             {

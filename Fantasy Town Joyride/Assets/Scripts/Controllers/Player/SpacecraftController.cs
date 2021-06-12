@@ -138,7 +138,7 @@ namespace Spacecraft.Controllers.Player
 
         private void FixedUpdate()
         {
-            if (IsPaused)
+            if (IsGameOver)
             {
                 return;
             }
