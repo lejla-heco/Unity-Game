@@ -19,6 +19,9 @@ TagManager:
   - SpacecraftObject
   - RoadBlock
   - PowerUp
+  - SceneManagement
+  - GameOverMenu
+  - LevelWrapper
   layers:
   - Default
   - TransparentFX
