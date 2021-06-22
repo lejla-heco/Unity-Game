@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
-using NaughtyAttributes;
 using Spacecraft.Consts;
-using Spacecraft.ScriptableObjects.Chunks;
 using Spacecraft.ScriptableObjects.Gems;
 using Spacecraft.ScriptableObjects.Obstacles;
 using UnityEngine;
@@ -20,6 +17,8 @@ namespace Spacecraft.ScriptableObjects
         [SerializeField] public List<Obstacle> Items;
 
         [SerializeField] public List<Gem> Gems;
+
+        [SerializeField] public List<Speeder> Speeders;
 
         public GameObject GetDefaultLevelChunk()
         {
@@ -40,6 +39,12 @@ namespace Spacecraft.ScriptableObjects
             }
 
             return Obs;
+        }
+
+
+        public Speeder GetSpeederById(int id)
+        {
+            return Speeders.Find(speeder => speeder.Id == id);
         }
     }
 }

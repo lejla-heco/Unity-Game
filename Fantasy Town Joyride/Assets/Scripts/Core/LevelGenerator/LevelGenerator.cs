@@ -52,6 +52,16 @@ namespace Spacecraft.Core.LevelGenerator
             {
                 PickAndSpawnChunk();
             }
+
+            // generate player
+            // load prefab
+            var Id = PlayerPrefs.GetInt("ActiveSpeeder", 1);
+            var LoadedSpeeder = AssetsCollection.GetSpeederById(Id);
+
+            Instantiate(
+                LoadedSpeeder.ShipModel,
+                GameObject.FindWithTag("SpacecraftObject").transform
+            );
         }
 
         private void PickAndSpawnChunk()
@@ -159,7 +169,7 @@ namespace Spacecraft.Core.LevelGenerator
                 ChunkDataArray[NextRow, NextLane] = 1;
                 GeneratedObstacles++;
 
-               Instantiate(
+                Instantiate(
                     RandomObstacle.GetObject(),
                     new Vector3(Lanes[NextLane], 0, NextRow * 10 - 50),
                     RandomObstacle.GetRotation(),

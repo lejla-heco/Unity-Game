@@ -2,11 +2,12 @@ using System;
 using Spacecraft.Consts;
 using Spacecraft.Core.Entities;
 using Spacecraft.Core.LevelGenerator;
+using Spacecraft.ScriptableObjects;
 using UnityEngine;
 
 namespace Spacecraft.Controllers.Player
 {
-    [System.Serializable]
+    [Serializable]
     public enum LANE
     {
         Left,
@@ -23,6 +24,7 @@ namespace Spacecraft.Controllers.Player
         [SerializeField] private AudioClip SlideSound;
         [SerializeField] private float SlideLength;
         [SerializeField] private LevelGenerator LevelGenerator;
+
         private ShipAnimatorController ShipAnimator { get; set; }
 
         private GameObject Level;
@@ -42,8 +44,6 @@ namespace Spacecraft.Controllers.Player
         private void Awake()
         {
             //           Application.targetFrameRate = 20;
-
-            transform.position = Vector3.zero;
             CurrentAngle = IdleAngle;
             ShipAnimator = transform.GetChild(0).gameObject.GetComponent<ShipAnimatorController>();
             CharacterControl = GetComponent<CharacterController>();
