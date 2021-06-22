@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Spacecraft.Consts;
-using Spacecraft.Core;
 using Spacecraft.Core.Entities;
 using Spacecraft.Core.LevelGenerator;
 using UnityEngine;

@@ -13,6 +13,10 @@ namespace Spacecraft.UI
             StartCoroutine(AsynchronousLoad("Scenes/GameScene"));
         }
 
+        public void OpenGarage()
+        {
+            StartCoroutine(AsynchronousLoad("Scenes/Garage"));
+        }
 
         IEnumerator AsynchronousLoad(string scene)
         {

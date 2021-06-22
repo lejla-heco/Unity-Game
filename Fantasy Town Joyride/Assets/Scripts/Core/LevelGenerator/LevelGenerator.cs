@@ -159,7 +159,7 @@ namespace Spacecraft.Core.LevelGenerator
                 ChunkDataArray[NextRow, NextLane] = 1;
                 GeneratedObstacles++;
 
-                Instantiate(
+               Instantiate(
                     RandomObstacle.GetObject(),
                     new Vector3(Lanes[NextLane], 0, NextRow * 10 - 50),
                     RandomObstacle.GetRotation(),
