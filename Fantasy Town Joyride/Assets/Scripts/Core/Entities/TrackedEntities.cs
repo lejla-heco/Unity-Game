@@ -35,6 +35,10 @@ namespace Spacecraft.Core.Entities
         private void Die()
         {
             IsGameOver = true;
+
+            // save points
+            var SavedPoints = PlayerPrefs.GetInt("CollectedMoney", 0);
+            PlayerPrefs.SetInt("CollectedMoney", SavedPoints + Points);
         }
     }
 }

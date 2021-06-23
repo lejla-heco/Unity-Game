@@ -3,25 +3,17 @@ using Spacecraft.Core.Entities;
 using TMPro;
 using UnityEngine;
 
-namespace Spacecraft
+namespace Spacecraft.Behaviours.Colliders
 {
     public class CoinCollector : TrackedEntity
     {
-        private int Delay;
-        private int ThisGamesPoints = 0;
         [SerializeField] private AudioClip CoinPickUpSound;
         [SerializeField] private TextMeshProUGUI CollectedCoins;
 
         private void Start()
         {
-            Points = 0; //PlayerPrefs.GetInt("CollectedMoney", 0);
-            Delay = 2;
-            CollectedCoins.text = "Coins: " + Points.ToString();
-        }
-
-        private void Update()
-        {
-            if (IsGameOver) PlayerPrefs.SetInt("CollectedMoney", Points + ThisGamesPoints);
+            Points = 0;
+            CollectedCoins.text = "Coins: " + Points;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -30,7 +22,7 @@ namespace Spacecraft
             {
                 PlayCoinPickUpSound(other);
                 other.gameObject.SetActive(false);
-                ThisGamesPoints += 2;
+                Points += 2;
                 Reactivate(other);
             }
 
@@ -38,17 +30,17 @@ namespace Spacecraft
             {
                 PlayCoinPickUpSound(other);
                 other.gameObject.SetActive(false);
-                ThisGamesPoints += 1;
+                Points += 1;
                 Reactivate(other);
             }
 
-            int Result = Points + ThisGamesPoints;
-            CollectedCoins.text = "Coins: " + Result.ToString();
+            int Result = Points;
+            CollectedCoins.text = "Coins: " + Result;
         }
 
         IEnumerator Reactivate(Collider other)
         {
-            yield return new WaitForSeconds(Delay);
+            yield return new WaitForSeconds(2);
             other.gameObject.SetActive(true);
         }
 

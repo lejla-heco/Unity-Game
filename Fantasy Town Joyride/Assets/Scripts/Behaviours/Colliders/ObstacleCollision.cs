@@ -22,7 +22,7 @@ namespace Spacecraft.Behaviours.Colliders
 
         private void Start()
         {
-            Renderer = GetComponent<Renderer>();
+            Renderer = gameObject.GetComponentInChildren<Renderer>();
             RegularColors = new Color[Renderer.materials.Length];
 
             for (int i = 0; i < Renderer.materials.Length; i++)

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c50ed4daba4214828c9e641aeab681, type: 3}
   m_Name: ShopItemsCollection
   m_EditorClassIdentifier: 
-  ShopItems:
-  - {fileID: 11400000, guid: 56ca14390fbe5468e944d7b3a2c60e0c, type: 2}
-  - {fileID: 11400000, guid: eba0d5138e0534e05b9b52c76fbeb51e, type: 2}
-  - {fileID: 11400000, guid: 434661302140247199935b1ce54b2e90, type: 2}
-  - {fileID: 11400000, guid: 901ef7ac11dbb4165abc6cce6c237596, type: 2}
+  Speeders:
+  - {fileID: 11400000, guid: 4aec3e8d00d544aa5a05a6a3b4e2b405, type: 2}
+  - {fileID: 11400000, guid: 293194a34a19d4730bd06323365acb72, type: 2}
+  - {fileID: 11400000, guid: 9002a072cea0a491083b1e62db84f013, type: 2}
+  - {fileID: 11400000, guid: fc6396071cb0044c18f0655b873e5dd4, type: 2}

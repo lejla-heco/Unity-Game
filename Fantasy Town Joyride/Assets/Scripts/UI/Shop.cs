@@ -32,13 +32,13 @@ namespace Spacecraft.UI
 
         public void PurchaseSpeeder()
         {
-            var DesiredSpeederPrice = Collection.ShopItems[SpeederIndex].Price;
+            var DesiredSpeederPrice = Collection.Speeders[SpeederIndex].Price;
             if (Coins < DesiredSpeederPrice)
             {
                 return;
             }
 
-            Collection.ShopItems[SpeederIndex].Purchase();
+            Collection.Speeders[SpeederIndex].Purchase();
             // deduct money
             Coins -= DesiredSpeederPrice;
             PlayerPrefs.SetInt("CollectedMoney", Coins);
@@ -48,7 +48,7 @@ namespace Spacecraft.UI
 
         public void ActivateSpeeder()
         {
-            Collection.ShopItems[SpeederIndex].Activate();
+            Collection.Speeders[SpeederIndex].Activate();
 
             IsDirty = true;
         }
@@ -72,14 +72,14 @@ namespace Spacecraft.UI
         {
             var Temp = SpeederIndex;
             Temp += direction;
-            if (Temp >= Collection.ShopItems.Count)
+            if (Temp >= Collection.Speeders.Count)
             {
                 Temp = 0;
             }
 
             if (Temp < 0)
             {
-                Temp = Collection.ShopItems.Count - 1;
+                Temp = Collection.Speeders.Count - 1;
             }
 
             SpeederIndex = Temp;
@@ -100,14 +100,14 @@ namespace Spacecraft.UI
 
             // display current speeder
             SpeederInScene = Instantiate(
-                Collection.ShopItems[SpeederIndex].ShipModel,
+                Collection.Speeders[SpeederIndex].ShipModel,
                 new Vector3(0, 0, 0),
                 Quaternion.Euler(new Vector3(11, -200, 0))
             );
 
-            var Price = Collection.ShopItems[SpeederIndex].Price;
-            var IsPurchased = Collection.ShopItems[SpeederIndex].DoIOwnThisItem();
-            var IsActive = Collection.ShopItems[SpeederIndex].IsThisSpeederActive();
+            var Price = Collection.Speeders[SpeederIndex].Price;
+            var IsPurchased = Collection.Speeders[SpeederIndex].DoIOwnThisItem();
+            var IsActive = Collection.Speeders[SpeederIndex].IsThisSpeederActive();
 
             if (Price > Coins || IsPurchased)
             {
