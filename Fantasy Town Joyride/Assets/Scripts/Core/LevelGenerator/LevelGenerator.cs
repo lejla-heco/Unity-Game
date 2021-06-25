@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Spacecraft.Consts;
 using Spacecraft.Core.LevelGenerator;
 using Spacecraft.ScriptableObjects;
@@ -43,12 +44,16 @@ namespace Spacecraft.Core.LevelGenerator
             {
                 // take an empty chunk and generate obstacles on it
                 LevelPool.Add(GenerateChunkWithObjects(
-                    Instantiate(AssetsCollection.DefaultLevelChunk, Vector3.zero, Quaternion.identity, ChunksParent
-                    )));
+                    Instantiate(AssetsCollection.DefaultLevelChunk, Vector3.zero, Quaternion.identity, ChunksParent)));
             }
 
+            var Chunk = GenerateChunkWithObjects(
+                Instantiate(AssetsCollection.DefaultLevelChunk, Vector3.zero, Quaternion.identity, ChunksParent),0);
+            
+            // spawn first chunk with obstacle and other offset
+            SpawnChunk(Chunk);
 
-            for (int i = 0; i < GameConsts.InitialChunksNumber; i++)
+            for (int i = 1; i < GameConsts.InitialChunksNumber; i++)
             {
                 PickAndSpawnChunk();
             }
@@ -67,10 +72,14 @@ namespace Spacecraft.Core.LevelGenerator
         private void PickAndSpawnChunk()
         {
             var PooledChunk = LevelPool.PickChunkFromPool();
-            PooledChunk.transform.position = new Vector3(0, 0,
+            SpawnChunk(PooledChunk);
+        }
+
+        private void SpawnChunk(GameObject chunk)
+        {
+            chunk.transform.position = new Vector3(0, 0,
                 (ActiveChunkCount * GameConsts.ChunkLength) + GameConsts.ChunkGenerationOffset);
-            PooledChunk.SetActive(true);
-            Debug.Log("ActiveChunkCount: " + ActiveChunkCount);
+            chunk.SetActive(true);
             ActiveChunkCount++;
         }
 
@@ -80,28 +89,33 @@ namespace Spacecraft.Core.LevelGenerator
         }
 
 
-        private GameObject GenerateChunkWithObjects(GameObject chunk, int Level = 1)
+        private GameObject GenerateChunkWithObjects(GameObject chunk, int chunkIndex = 1, int level = 1)
         {
             int ObstaclesPerLevelBase = 4;
             int CoinsPerLevelBase = 2;
 
+            // if this is the very first chunk, set offset for generated stuff
+            int FirstValue = chunkIndex == 0
+                ? 1
+                : 0;
+            
             // chunk 2d array
             int[,] ChunkDataArray =
             {
                 {
-                    0, 0, 0
+                    FirstValue, FirstValue, FirstValue
                 },
                 {
-                    0, 0, 0
+                    FirstValue, FirstValue, FirstValue
                 },
                 {
-                    0, 0, 0
+                    FirstValue, FirstValue, FirstValue
                 },
                 {
-                    0, 0, 0
+                    FirstValue, FirstValue, FirstValue
                 },
                 {
-                    0, 0, 0
+                    FirstValue, FirstValue, FirstValue
                 },
                 {
                     0, 0, 0
@@ -122,7 +136,7 @@ namespace Spacecraft.Core.LevelGenerator
 
             // generate coins
             var GeneratedCoins = 0;
-            while (GeneratedCoins < CoinsPerLevelBase * Level)
+            while (GeneratedCoins < CoinsPerLevelBase * level)
             {
                 var NextLane = GameConsts.Rnd.Next(Lanes.Length);
                 var NextRow = GameConsts.Rnd.Next(10);
@@ -145,9 +159,9 @@ namespace Spacecraft.Core.LevelGenerator
 
             // generate obstacles
             var GeneratedObstacles = 0;
-            while (GeneratedObstacles < ObstaclesPerLevelBase * Level)
+            while (GeneratedObstacles < ObstaclesPerLevelBase * level)
             {
-                var RandomObstacle = AssetsCollection.GetRandomObstacle(Level);
+                var RandomObstacle = AssetsCollection.GetRandomObstacle(level);
 
                 var NextLane = GameConsts.Rnd.Next(Lanes.Length);
                 var NextRow = GameConsts.Rnd.Next(10);
