@@ -101,9 +101,10 @@ namespace Spacecraft.UI
             // display current speeder
             SpeederInScene = Instantiate(
                 Collection.Speeders[SpeederIndex].ShipModel,
-                new Vector3(0, 0, 0),
-                Quaternion.Euler(new Vector3(11, -200, 0))
+                new Vector3(0, 1, 0),
+                Quaternion.Euler(new Vector3(20, -170, 0))
             );
+            SpeederInScene.transform.localScale = new Vector3(2, 2, 2);
 
             var Price = Collection.Speeders[SpeederIndex].Price;
             var IsPurchased = Collection.Speeders[SpeederIndex].DoIOwnThisItem();
