@@ -17,6 +17,9 @@ namespace Spacecraft.Core.LevelGenerator
         private int[] GeneratePowerUp = new int[]
             {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0};
 
+        private int[] GenerateNewLife = new int[]
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0};
+
         private ObjectPool<GameObject> LevelPool { get; set; }
 
         private int ActiveChunkCount = 0;
@@ -208,7 +211,25 @@ namespace Spacecraft.Core.LevelGenerator
                     );
                 }
             }
+            
+            //generate new life
+            
+            if (GenerateNewLife[GameConsts.Rnd.Next(GenerateNewLife.Length)] == 1)
+            {
+                var NextLane = GameConsts.Rnd.Next(Lanes.Length);
+                var NextRow = GameConsts.Rnd.Next(10);
 
+                if (ChunkDataArray[NextRow, NextLane] == 0)
+                {
+                    ChunkDataArray[NextRow, NextLane] = 4;
+                    Instantiate(
+                        AssetsCollection.NewLife,
+                        new Vector3(Lanes[NextLane], 1.3f, NextRow * 10 - 50),
+                        Quaternion.Euler(-90,0,0),
+                        chunk.transform
+                    );
+                }
+            }
 
             chunk.SetActive(false);
             chunk.transform.SetParent(LevelWrapper.transform);

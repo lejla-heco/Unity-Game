@@ -14,6 +14,8 @@ namespace Spacecraft.ScriptableObjects
 
         [SerializeField] public GameObject PickUp;
 
+        [SerializeField] public GameObject NewLife;
+
         [SerializeField] public List<Obstacle> Items;
 
         [SerializeField] public List<Gem> Gems;

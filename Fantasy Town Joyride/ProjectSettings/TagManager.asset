@@ -22,6 +22,7 @@ TagManager:
   - SceneManagement
   - GameOverMenu
   - LevelWrapper
+  - Heart
   layers:
   - Default
   - TransparentFX

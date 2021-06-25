@@ -15,6 +15,7 @@ MonoBehaviour:
   DefaultLevelChunk: {fileID: 6658467306721053266, guid: 8e8e144d34f074d32b5a35128772f638,
     type: 3}
   PickUp: {fileID: 3049428253405200621, guid: e62e775cb5c996a4c944ff20f3cec481, type: 3}
+  NewLife: {fileID: 7737762334993098777, guid: c6fd2937a651f5743b5700a8ae72e537, type: 3}
   Items:
   - {fileID: 11400000, guid: b7ced5831689c4114af9c50a72fe0736, type: 2}
   - {fileID: 11400000, guid: 6f6aa5a758d8c4a22a64f80a45e3fe1d, type: 2}
