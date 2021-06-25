@@ -25,10 +25,15 @@ namespace Spacecraft.Core.LevelGenerator
 			this.ObjectsList.Add(gameObject);
 		}
 
+		public void Remove(int index)
+		{
+			ObjectsList.RemoveAt(index);
+			Index--;
+		}
+		
 		public T PickChunkFromPool()
 		{
 			if (Index >= ObjectsList.Count) Index = 0;
-			Debug.Log(Index);
 			return ObjectsList[Index++];
 		}
 	}

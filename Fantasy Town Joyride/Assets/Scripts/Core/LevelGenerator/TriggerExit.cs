@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace Spacecraft.Core.LevelGenerator
@@ -15,7 +16,16 @@ namespace Spacecraft.Core.LevelGenerator
 			if (other.gameObject.CompareTag("Player"))
 			{
 				OnChunkExited();
-				transform.parent.gameObject.SetActive(false);
+
+				if (transform.parent.gameObject.tag == "chunk0")
+				{
+					Destroy(transform.parent.gameObject);
+				}
+				else
+				{
+					transform.parent.gameObject.SetActive(false);	
+				}
+				
 			}
 		}
 

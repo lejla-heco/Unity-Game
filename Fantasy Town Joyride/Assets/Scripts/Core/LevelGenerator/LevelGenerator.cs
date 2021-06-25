@@ -40,29 +40,27 @@ namespace Spacecraft.Core.LevelGenerator
         {
             LevelPool = new ObjectPool<GameObject>();
 
-            for (int i = 0; i < 4; i++) // how many level segments we want
+            for (int i = 0; i < 6; i++) // how many level segments we want
             {
                 // take an empty chunk and generate obstacles on it
                 LevelPool.Add(GenerateChunkWithObjects(
-                    Instantiate(AssetsCollection.DefaultLevelChunk, Vector3.zero, Quaternion.identity, ChunksParent)));
+                    Instantiate(AssetsCollection.DefaultLevelChunk, Vector3.zero, Quaternion.identity, ChunksParent), i));
             }
 
-            var Chunk = GenerateChunkWithObjects(
-                Instantiate(AssetsCollection.DefaultLevelChunk, Vector3.zero, Quaternion.identity, ChunksParent),0);
-            
-            // spawn first chunk with obstacle and other offset
-            SpawnChunk(Chunk);
-
-            for (int i = 1; i < GameConsts.InitialChunksNumber; i++)
+            for (int i = 0; i < GameConsts.InitialChunksNumber; i++)
             {
                 PickAndSpawnChunk();
             }
 
+LevelPool.Remove(0);
+            Debug.Log("Active chunks: " + ActiveChunkCount);
             // generate player
             // load prefab
             var Id = PlayerPrefs.GetInt("ActiveSpeeder", 1);
             var LoadedSpeeder = AssetsCollection.GetSpeederById(Id);
 
+            LoadedSpeeder.ShipModel.transform.localScale = new Vector3(.7f, .7f, .7f);
+            
             Instantiate(
                 LoadedSpeeder.ShipModel,
                 GameObject.FindWithTag("SpacecraftObject").transform
@@ -212,6 +210,7 @@ namespace Spacecraft.Core.LevelGenerator
 
             chunk.SetActive(false);
             chunk.transform.SetParent(LevelWrapper.transform);
+            chunk.gameObject.tag = "chunk" + (chunkIndex == 0 ? "0" : "");
             return chunk;
         }
     }

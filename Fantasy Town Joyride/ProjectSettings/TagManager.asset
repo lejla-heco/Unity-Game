@@ -22,6 +22,8 @@ TagManager:
   - SceneManagement
   - GameOverMenu
   - LevelWrapper
+  - chunk
+  - chunk0
   layers:
   - Default
   - TransparentFX
