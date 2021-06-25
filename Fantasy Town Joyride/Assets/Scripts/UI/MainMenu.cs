@@ -18,6 +18,11 @@ namespace Spacecraft.UI
             StartCoroutine(AsynchronousLoad("Scenes/Garage"));
         }
 
+        public void ExitGame()
+        {
+            Application.Quit();
+        }
+
         IEnumerator AsynchronousLoad(string scene)
         {
             yield return null;
