@@ -62,7 +62,7 @@ namespace Spacecraft.Core.LevelGenerator
             var Id = PlayerPrefs.GetInt("ActiveSpeeder", 1);
             var LoadedSpeeder = AssetsCollection.GetSpeederById(Id);
 
-            LoadedSpeeder.ShipModel.transform.localScale = new Vector3(.7f, .7f, .7f);
+            LoadedSpeeder.ShipModel.transform.localScale = new Vector3(.8f, .8f, .8f);
 
             Instantiate(
                 LoadedSpeeder.ShipModel,
