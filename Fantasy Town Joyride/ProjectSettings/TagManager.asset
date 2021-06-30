@@ -23,6 +23,7 @@ TagManager:
   - GameOverMenu
   - LevelWrapper
   - Heart
+  - Chunk0
   layers:
   - Default
   - TransparentFX

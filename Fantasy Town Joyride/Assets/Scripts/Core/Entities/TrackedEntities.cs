@@ -22,6 +22,7 @@ namespace Spacecraft.Core.Entities
 
         public int LoseLife(int howManyLives = 1)
         {
+            return 3;
             Lives -= howManyLives;
             if (Lives <= 0)
             {

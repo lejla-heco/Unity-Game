@@ -43,28 +43,26 @@ namespace Spacecraft.Core.LevelGenerator
         {
             LevelPool = new ObjectPool<GameObject>();
 
-            for (int i = 0; i < 4; i++) // how many level segments we want
+            for (int i = 0; i < 6; i++) // how many level segments we want
             {
                 // take an empty chunk and generate obstacles on it
                 LevelPool.Add(GenerateChunkWithObjects(
-                    Instantiate(AssetsCollection.DefaultLevelChunk, Vector3.zero, Quaternion.identity, ChunksParent)));
+                    Instantiate(AssetsCollection.DefaultLevelChunk, Vector3.zero, Quaternion.identity, ChunksParent),
+                    i));
             }
 
-            var Chunk = GenerateChunkWithObjects(
-                Instantiate(AssetsCollection.DefaultLevelChunk, Vector3.zero, Quaternion.identity, ChunksParent),0);
-            
-            // spawn first chunk with obstacle and other offset
-            SpawnChunk(Chunk);
-
-            for (int i = 1; i < GameConsts.InitialChunksNumber; i++)
+            for (int i = 0; i < GameConsts.InitialChunksNumber; i++)
             {
                 PickAndSpawnChunk();
             }
 
+            LevelPool.Remove(0); // remove object with offset
             // generate player
             // load prefab
             var Id = PlayerPrefs.GetInt("ActiveSpeeder", 1);
             var LoadedSpeeder = AssetsCollection.GetSpeederById(Id);
+
+            LoadedSpeeder.ShipModel.transform.localScale = new Vector3(.7f, .7f, .7f);
 
             Instantiate(
                 LoadedSpeeder.ShipModel,
@@ -75,6 +73,11 @@ namespace Spacecraft.Core.LevelGenerator
         private void PickAndSpawnChunk()
         {
             var PooledChunk = LevelPool.PickChunkFromPool();
+            while (PooledChunk.activeSelf) // we need to be sure this object is not active already
+            {
+                PooledChunk = LevelPool.PickChunkFromPool();
+            }
+
             SpawnChunk(PooledChunk);
         }
 
@@ -101,7 +104,7 @@ namespace Spacecraft.Core.LevelGenerator
             int FirstValue = chunkIndex == 0
                 ? 1
                 : 0;
-            
+
             // chunk 2d array
             int[,] ChunkDataArray =
             {
@@ -211,9 +214,9 @@ namespace Spacecraft.Core.LevelGenerator
                     );
                 }
             }
-            
+
             //generate new life
-            
+
             if (GenerateNewLife[GameConsts.Rnd.Next(GenerateNewLife.Length)] == 1)
             {
                 var NextLane = GameConsts.Rnd.Next(Lanes.Length);
@@ -225,7 +228,7 @@ namespace Spacecraft.Core.LevelGenerator
                     Instantiate(
                         AssetsCollection.NewLife,
                         new Vector3(Lanes[NextLane], 1.3f, NextRow * 10 - 50),
-                        Quaternion.Euler(-90,0,0),
+                        Quaternion.Euler(-90, 0, 0),
                         chunk.transform
                     );
                 }
@@ -233,6 +236,11 @@ namespace Spacecraft.Core.LevelGenerator
 
             chunk.SetActive(false);
             chunk.transform.SetParent(LevelWrapper.transform);
+            if (chunkIndex == 0)
+            {
+                chunk.gameObject.tag = "Chunk0";
+            }
+
             return chunk;
         }
     }
