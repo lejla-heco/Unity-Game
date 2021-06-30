@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Spacecraft
+namespace Spacecraft.Behaviours.Colliders
 {
     public class PickUpEffect : MonoBehaviour
     {

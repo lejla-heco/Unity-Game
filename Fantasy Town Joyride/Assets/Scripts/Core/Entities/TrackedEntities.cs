@@ -32,6 +32,11 @@ namespace Spacecraft.Core.Entities
             return Lives;
         }
 
+        public void GetLife()
+        {
+            Lives += 1;
+        }
+
 
         private void Die()
         {

@@ -39,6 +39,17 @@ namespace Spacecraft.Behaviours.Colliders
                 StartCoroutine(ReactivatePowerUp(other.gameObject));
             }
 
+            if (other.gameObject.CompareTag("Heart"))
+            {
+                other.gameObject.SetActive(false);
+                if (Lives != 3){ 
+                    if (Lives == 1) SecondLife.color = ThirdLife.color;
+                    else if (Lives == 2) FirstLife.color = ThirdLife.color;
+                    GetLife();
+                }
+                StartCoroutine(ReactivatePowerUp(other.gameObject));
+            }
+
             if (!IsProtected)
             {
                 if (other.gameObject.CompareTag("Barrel") || other.gameObject.CompareTag("Hidrant") ||
