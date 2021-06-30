@@ -24,6 +24,7 @@ namespace Spacecraft.Controllers.Player
         [SerializeField] private AudioClip SlideSound;
         [SerializeField] private float SlideLength;
         [SerializeField] private LevelGenerator LevelGenerator;
+        private bool FirstReset = true;
 
         private ShipAnimatorController ShipAnimator { get; set; }
 
@@ -187,6 +188,12 @@ namespace Spacecraft.Controllers.Player
                     child.localPosition = new Vector3(LocalPosition.x, LocalPosition.y,
                         (ActiveChildren * GameConsts.ChunkLength) + GameConsts.ChunkGenerationOffset);
                     ActiveChildren++;
+                }
+
+                if (FirstReset)
+                {
+                    FirstReset = false;
+                    GameConsts.HowManyUnitsUntilWorldResets = 300;
                 }
             }
 

@@ -43,7 +43,7 @@ namespace Spacecraft.Core.LevelGenerator
         {
             LevelPool = new ObjectPool<GameObject>();
 
-            for (int i = 0; i < 6; i++) // how many level segments we want
+            for (int i = 0; i < 10; i++) // how many level segments we want
             {
                 // take an empty chunk and generate obstacles on it
                 LevelPool.Add(GenerateChunkWithObjects(

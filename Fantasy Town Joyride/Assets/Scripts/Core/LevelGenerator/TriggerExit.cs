@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Security.Cryptography;
+using Spacecraft.Consts;
+using Spacecraft.Controllers.Player;
 using UnityEngine;
 
 namespace Spacecraft.Core.LevelGenerator
