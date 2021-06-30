@@ -34,8 +34,7 @@ namespace Spacecraft.Behaviours.Colliders
                 Reactivate(other);
             }
 
-            int Result = Points;
-            CollectedCoins.text = "Coins: " + Result;
+            CollectedCoins.text = "Coins: " + Points;
         }
 
         IEnumerator Reactivate(Collider other)

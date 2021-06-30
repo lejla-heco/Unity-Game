@@ -47,7 +47,8 @@ namespace Spacecraft.Core.LevelGenerator
             {
                 // take an empty chunk and generate obstacles on it
                 LevelPool.Add(GenerateChunkWithObjects(
-                    Instantiate(AssetsCollection.DefaultLevelChunk, Vector3.zero, Quaternion.identity, ChunksParent), i));
+                    Instantiate(AssetsCollection.DefaultLevelChunk, Vector3.zero, Quaternion.identity, ChunksParent),
+                    i));
             }
 
             for (int i = 0; i < GameConsts.InitialChunksNumber; i++)
@@ -55,15 +56,14 @@ namespace Spacecraft.Core.LevelGenerator
                 PickAndSpawnChunk();
             }
 
-LevelPool.Remove(0);
-            Debug.Log("Active chunks: " + ActiveChunkCount);
+            LevelPool.Remove(0); // remove object with offset
             // generate player
             // load prefab
             var Id = PlayerPrefs.GetInt("ActiveSpeeder", 1);
             var LoadedSpeeder = AssetsCollection.GetSpeederById(Id);
 
             LoadedSpeeder.ShipModel.transform.localScale = new Vector3(.7f, .7f, .7f);
-            
+
             Instantiate(
                 LoadedSpeeder.ShipModel,
                 GameObject.FindWithTag("SpacecraftObject").transform
@@ -73,6 +73,11 @@ LevelPool.Remove(0);
         private void PickAndSpawnChunk()
         {
             var PooledChunk = LevelPool.PickChunkFromPool();
+            while (PooledChunk.activeSelf) // we need to be sure this object is not active already
+            {
+                PooledChunk = LevelPool.PickChunkFromPool();
+            }
+
             SpawnChunk(PooledChunk);
         }
 
@@ -99,7 +104,7 @@ LevelPool.Remove(0);
             int FirstValue = chunkIndex == 0
                 ? 1
                 : 0;
-            
+
             // chunk 2d array
             int[,] ChunkDataArray =
             {
@@ -209,9 +214,9 @@ LevelPool.Remove(0);
                     );
                 }
             }
-            
+
             //generate new life
-            
+
             if (GenerateNewLife[GameConsts.Rnd.Next(GenerateNewLife.Length)] == 1)
             {
                 var NextLane = GameConsts.Rnd.Next(Lanes.Length);
@@ -223,7 +228,7 @@ LevelPool.Remove(0);
                     Instantiate(
                         AssetsCollection.NewLife,
                         new Vector3(Lanes[NextLane], 1.3f, NextRow * 10 - 50),
-                        Quaternion.Euler(-90,0,0),
+                        Quaternion.Euler(-90, 0, 0),
                         chunk.transform
                     );
                 }
@@ -231,7 +236,11 @@ LevelPool.Remove(0);
 
             chunk.SetActive(false);
             chunk.transform.SetParent(LevelWrapper.transform);
-            chunk.gameObject.tag = "chunk" + (chunkIndex == 0 ? "0" : "");
+            if (chunkIndex == 0)
+            {
+                chunk.gameObject.tag = "Chunk0";
+            }
+
             return chunk;
         }
     }
