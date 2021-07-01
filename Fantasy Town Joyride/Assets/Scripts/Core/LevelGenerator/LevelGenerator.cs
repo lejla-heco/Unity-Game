@@ -26,7 +26,7 @@ namespace Spacecraft.Core.LevelGenerator
 
         private float[] Lanes =
         {
-            3.4f, 0, -3
+            3.6f, 0, -3.8f
         };
 
         private void OnEnable()
@@ -62,7 +62,7 @@ namespace Spacecraft.Core.LevelGenerator
             var Id = PlayerPrefs.GetInt("ActiveSpeeder", 1);
             var LoadedSpeeder = AssetsCollection.GetSpeederById(Id);
 
-            LoadedSpeeder.ShipModel.transform.localScale = new Vector3(.8f, .8f, .8f);
+            LoadedSpeeder.ShipModel.transform.localScale = new Vector3(.7f, .7f, .7f);
 
             Instantiate(
                 LoadedSpeeder.ShipModel,
